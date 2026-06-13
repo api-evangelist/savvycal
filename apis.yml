@@ -1,0 +1,73 @@
+aid: savvycal
+name: SavvyCal
+description: >
+  SavvyCal is a scheduling platform that provides a REST API for managing scheduling
+  links, availability, calendar connections, overlay scheduling, and booking page
+  customization. The API follows REST conventions, communicates in JSON, and supports
+  both personal access tokens and OAuth 2.0 for authentication. Developers can build
+  integrations that create and manage scheduling links, handle event bookings, configure
+  webhooks for real-time notifications, and manage workflows. SavvyCal also offers a
+  JavaScript embed library for embedding scheduling experiences directly into web
+  applications.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/savvycal/refs/heads/main/apis.yml
+created: 2026-06-13
+modified: 2026-06-13
+specificationVersion: "0.19"
+tags:
+  - Scheduling
+  - Calendar
+  - Appointments
+  - Availability
+  - Booking
+  - Meetings
+  - Webhooks
+
+apis:
+  - name: SavvyCal Meetings API
+    description: >
+      The SavvyCal Meetings REST API enables developers to manage scheduling links,
+      events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0
+      and personal access tokens for authentication and communicates in JSON format.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.savvycal.com/
+    baseURL: https://api.savvycal.com/v1
+    tags:
+      - Scheduling
+      - Meetings
+      - Calendar
+      - Webhooks
+    properties:
+      - type: Documentation
+        url: https://developers.savvycal.com/
+      - type: Authentication
+        url: https://developers.savvycal.com/authentication
+
+common:
+  - type: Website
+    url: https://savvycal.com/
+  - type: Documentation
+    url: https://developers.savvycal.com/
+  - type: GitHubOrg
+    url: https://github.com/svycal
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/savvycal
+  - type: Blog
+    url: https://savvycal.com/blog
+  - type: Pricing
+    url: https://savvycal.com/pricing
+  - type: StatusPage
+    url: https://savvycal.instatus.com/
+  - type: X
+    url: https://x.com/savvycal
+  - type: Plans
+    url: plans/savvycal-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/savvycal-rate-limits.yml
+  - type: FinOps
+    url: finops/savvycal-finops.yml
+
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

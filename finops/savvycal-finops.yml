@@ -1,0 +1,85 @@
+specificationVersion: "1.0"
+id: savvycal-finops
+name: SavvyCal FinOps Profile
+description: >
+  FinOps Framework FOCUS-aligned cost and usage profile for SavvyCal scheduling
+  platform API consumption.
+url: https://savvycal.com/pricing
+
+provider:
+  name: SavvyCal
+  url: https://savvycal.com/
+  billingModel: per-seat
+  billingPeriods:
+    - monthly
+    - annual
+
+costModel:
+  type: subscription
+  unit: user/month
+  notes: >
+    SavvyCal charges per seat (user). API access is a Premium plan feature.
+    Annual billing provides approximately a 15% discount (equivalent to 2 free months).
+
+skus:
+  - id: savvycal-free
+    name: Free
+    description: Free tier with limited features; no API access
+    priceMonthly: 0.00
+    currency: USD
+    apiAccess: false
+    includes:
+      - Meeting polls
+      - Calendar overlay
+
+  - id: savvycal-basic
+    name: Basic
+    description: Core scheduling features for individuals and small teams; no API access
+    priceMonthly: 12.00
+    priceAnnualMonthly: 10.00
+    currency: USD
+    apiAccess: false
+    includes:
+      - Unlimited scheduling links
+      - Team scheduling
+      - Calendar connections
+
+  - id: savvycal-premium
+    name: Premium
+    description: Full-featured plan with API and webhook access for developers and businesses
+    priceMonthly: 20.00
+    priceAnnualMonthly: 17.00
+    currency: USD
+    apiAccess: true
+    includes:
+      - REST API access
+      - Webhooks
+      - Custom domains
+      - CRM integrations
+      - Zapier
+      - Workflows and reminders
+
+costDrivers:
+  - name: Seat Count
+    description: Number of users on the account; each user requires a separate license
+    unit: user
+    impact: linear
+
+  - name: Billing Period
+    description: Annual billing reduces per-seat cost by approximately 15%
+    options:
+      - monthly: full price
+      - annual: ~15% discount (2 months free)
+
+optimization:
+  - recommendation: Use annual billing to save approximately 15% per seat
+  - recommendation: Evaluate whether Premium plan API access is needed; Basic covers most non-API use cases
+  - recommendation: Remove inactive user seats to reduce per-seat costs
+  - recommendation: Use personal access tokens for development/testing to avoid OAuth overhead
+
+tags:
+  - scheduling
+  - calendar
+  - saas
+  - per-seat
+  - subscription

@@ -1,0 +1,57 @@
+specificationVersion: "0.1"
+id: savvycal-plans-pricing
+name: SavvyCal Plans and Pricing
+description: Pricing plans for SavvyCal scheduling platform
+url: https://savvycal.com/pricing
+currency: USD
+plans:
+  - name: Free
+    description: >
+      Basic access to SavvyCal for personal use, including meeting polls and
+      calendar overlay features. Does not include personal scheduling links or
+      API access.
+    price: 0
+    billingPeriod: monthly
+    features:
+      - Meeting polls
+      - Calendar overlay
+      - Unlimited calendar connections
+
+  - name: Basic
+    description: >
+      Scheduling for individuals and small teams with straightforward scheduling
+      needs. Includes unlimited scheduling links and team scheduling capabilities.
+    price: 12
+    billingPeriod: monthly
+    annualPrice: 10
+    annualBillingNote: Annual billing saves 2 months
+    features:
+      - Unlimited calendars
+      - Unlimited scheduling links
+      - Team scheduling
+      - Calendar overlay
+      - Meeting polls
+      - 30-day money-back guarantee
+
+  - name: Premium
+    description: >
+      Advanced scheduling for businesses requiring enhanced control, branding,
+      and integrations. Includes API and webhook access, custom domains, and
+      CRM integrations.
+    price: 20
+    billingPeriod: monthly
+    annualPrice: 17
+    annualBillingNote: Annual billing saves 2 months
+    features:
+      - Everything in Basic
+      - API access
+      - Webhooks
+      - Custom domains
+      - Custom branding (colors, avatar, banner)
+      - Assistant delegation
+      - Paid bookings
+      - Reminders and workflows
+      - CRM integrations
+      - Zapier integration
+      - Custom sending domains
+      - 30-day money-back guarantee

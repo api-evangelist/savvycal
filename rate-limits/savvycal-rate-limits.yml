@@ -1,0 +1,47 @@
+specificationVersion: "0.1"
+id: savvycal-rate-limits
+name: SavvyCal API Rate Limits
+description: >
+  Rate limiting information for the SavvyCal REST API. SavvyCal has not publicly
+  documented specific rate limit thresholds. The API uses OAuth 2.0 access tokens
+  with a 2-hour (7200 second) expiry. Developers should implement exponential
+  backoff and honor any rate limit headers returned in API responses.
+url: https://developers.savvycal.com/
+limits:
+  - name: Access Token Expiry
+    description: >
+      OAuth 2.0 access tokens are short-lived and expire after 2 hours (7200
+      seconds). Use the refresh token to obtain a new access token before or
+      after expiry.
+    duration: 7200
+    durationUnit: seconds
+    scope: token
+
+  - name: API Request Rate
+    description: >
+      SavvyCal does not publicly document specific per-minute or per-hour request
+      rate limits. Developers should implement standard retry logic with exponential
+      backoff when receiving HTTP 429 Too Many Requests responses.
+    documented: false
+    recommendation: Implement exponential backoff on HTTP 429 responses
+
+authentication:
+  - type: PersonalAccessToken
+    description: >
+      Personal access tokens created at savvycal.com/developers. Used for testing
+      and controlling your own account. Passed as a Bearer token in the
+      Authorization header.
+    headerName: Authorization
+    headerFormat: "Bearer pt_secret_XXXXXXXXXXX"
+
+  - type: OAuth2
+    description: >
+      OAuth 2.0 authorization code flow for building integrations on behalf of
+      other users. Access tokens expire in 2 hours; refresh tokens are long-lived.
+    authorizationUrl: https://savvycal.com/oauth/authorize
+    tokenUrl: https://savvycal.com/oauth/token
+    grantTypes:
+      - authorization_code
+      - refresh_token
+    accessTokenExpiry: 7200
+    accessTokenExpiryUnit: seconds
