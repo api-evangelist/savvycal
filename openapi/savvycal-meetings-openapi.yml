@@ -1,0 +1,1043 @@
+openapi: 3.0.3
+info:
+  title: SavvyCal Meetings API
+  description: >
+    The SavvyCal Meetings REST API enables developers to manage scheduling
+    links, events, webhooks, workflows, and time zones programmatically.
+    It uses OAuth 2.0 and personal access tokens for authentication and
+    communicates in JSON format.
+  version: "1.0"
+  contact:
+    name: SavvyCal Developer Support
+    url: https://developers.savvycal.com/
+  termsOfService: https://savvycal.com/legal/terms
+  license:
+    name: Proprietary
+    url: https://savvycal.com/
+
+servers:
+  - url: https://api.savvycal.com/v1
+    description: SavvyCal API v1
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Events
+    description: Manage scheduled events and bookings.
+  - name: Scheduling Links
+    description: Create and manage scheduling links for booking.
+  - name: Current User
+    description: Retrieve information about the authenticated user.
+  - name: Time Zones
+    description: List and retrieve time zone information.
+  - name: Webhooks
+    description: Configure webhooks for real-time event notifications.
+  - name: Workflows
+    description: Manage automation workflows.
+
+paths:
+
+  /me:
+    get:
+      operationId: getCurrentUser
+      summary: Get current user
+      description: Get the currently authenticated user's profile information.
+      tags:
+        - Current User
+      responses:
+        "200":
+          description: Successful response with user profile.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /events:
+    get:
+      operationId: listEvents
+      summary: List events
+      description: List your events scheduled via SavvyCal.
+      tags:
+        - Events
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          description: Number of results per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        "200":
+          description: Paginated list of events.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /events/{event_id}:
+    get:
+      operationId: getEvent
+      summary: Get event
+      description: Fetch a single event by its ID.
+      tags:
+        - Events
+      parameters:
+        - $ref: "#/components/parameters/EventId"
+      responses:
+        "200":
+          description: Event details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /events/{event_id}/cancel:
+    post:
+      operationId: cancelEvent
+      summary: Cancel event
+      description: Cancel an event by its ID.
+      tags:
+        - Events
+      parameters:
+        - $ref: "#/components/parameters/EventId"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelEventRequest"
+      responses:
+        "200":
+          description: Event successfully canceled.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /links/{link_id}/events:
+    post:
+      operationId: createEvent
+      summary: Create event
+      description: >
+        Create a new event via a scheduling link. You can only create events
+        that match an available time slot for the underlying scheduling link.
+        Use the List Available Slots endpoint to find suitable times.
+      tags:
+        - Events
+      parameters:
+        - $ref: "#/components/parameters/LinkId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEventRequest"
+      responses:
+        "200":
+          description: Event successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntity"
+
+  /links:
+    get:
+      operationId: listSchedulingLinks
+      summary: List scheduling links
+      description: Get a paginated list of scheduling links for the authenticated user.
+      tags:
+        - Scheduling Links
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          description: Number of results per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        "200":
+          description: Paginated list of scheduling links.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LinkList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /links/{link_id}:
+    get:
+      operationId: getSchedulingLink
+      summary: Get scheduling link
+      description: Get a specific scheduling link by ID.
+      tags:
+        - Scheduling Links
+      parameters:
+        - $ref: "#/components/parameters/LinkId"
+      responses:
+        "200":
+          description: Scheduling link details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Link"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    patch:
+      operationId: updateSchedulingLink
+      summary: Update scheduling link
+      description: Update an existing scheduling link.
+      tags:
+        - Scheduling Links
+      parameters:
+        - $ref: "#/components/parameters/LinkId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateLinkRequest"
+      responses:
+        "200":
+          description: Updated scheduling link.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Link"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntity"
+
+  /time_zones:
+    get:
+      operationId: listTimeZones
+      summary: List time zones
+      description: Get a list of time zones with localized names and DST information.
+      tags:
+        - Time Zones
+      responses:
+        "200":
+          description: List of time zones.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeZoneList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /time_zones/{segments}:
+    get:
+      operationId: getTimeZone
+      summary: Get time zone
+      description: Get detailed information about a specific time zone.
+      tags:
+        - Time Zones
+      parameters:
+        - name: segments
+          in: path
+          required: true
+          description: >
+            The time zone identifier path segments (e.g., "America/New_York").
+          schema:
+            type: string
+          example: America/New_York
+      responses:
+        "200":
+          description: Time zone details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeZone"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      summary: List webhooks
+      description: Get a paginated list of webhooks for the authenticated user.
+      tags:
+        - Webhooks
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          description: Number of results per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        "200":
+          description: Paginated list of webhooks.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WebhookList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      operationId: createWebhook
+      summary: Create webhook
+      description: Create a new webhook for receiving event notifications.
+      tags:
+        - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWebhookRequest"
+      responses:
+        "201":
+          description: Webhook successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Webhook"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /webhooks/{webhook_id}:
+    get:
+      operationId: getWebhook
+      summary: Get webhook
+      description: Get a specific webhook by ID.
+      tags:
+        - Webhooks
+      parameters:
+        - $ref: "#/components/parameters/WebhookId"
+      responses:
+        "200":
+          description: Webhook details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Webhook"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      operationId: deleteWebhook
+      summary: Delete webhook
+      description: Delete an existing webhook.
+      tags:
+        - Webhooks
+      parameters:
+        - $ref: "#/components/parameters/WebhookId"
+      responses:
+        "200":
+          description: Webhook successfully deleted.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /workflows:
+    get:
+      operationId: listWorkflows
+      summary: List workflows
+      description: >
+        Get a paginated list of workflows for scopes the authenticated user manages.
+      tags:
+        - Workflows
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          description: Number of results per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        "200":
+          description: Paginated list of workflows.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /workflows/{workflow_id}:
+    get:
+      operationId: getWorkflow
+      summary: Get workflow
+      description: Get a specific workflow by ID.
+      tags:
+        - Workflows
+      parameters:
+        - name: workflow_id
+          in: path
+          required: true
+          description: The unique identifier of the workflow.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Workflow details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workflow"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+components:
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: >
+        Personal access tokens (prefixed with `pt_secret_`) or OAuth 2.0
+        access tokens. Include in the Authorization header as:
+        `Authorization: Bearer <token>`
+
+  parameters:
+    EventId:
+      name: event_id
+      in: path
+      required: true
+      description: The unique identifier of the event.
+      schema:
+        type: string
+
+    LinkId:
+      name: link_id
+      in: path
+      required: true
+      description: The unique identifier of the scheduling link.
+      schema:
+        type: string
+
+    WebhookId:
+      name: webhook_id
+      in: path
+      required: true
+      description: The unique identifier of the webhook.
+      schema:
+        type: string
+
+  responses:
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Forbidden:
+      description: Insufficient permissions to access the resource.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    UnprocessableEntity:
+      description: Validation errors.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  schemas:
+
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+
+    User:
+      type: object
+      description: A SavvyCal user account.
+      properties:
+        id:
+          type: string
+          description: Unique user identifier.
+        email:
+          type: string
+          format: email
+          description: User's email address.
+        first_name:
+          type: string
+          description: User's first name.
+        last_name:
+          type: string
+          description: User's last name.
+        display_name:
+          type: string
+          description: User's full display name.
+        time_zone:
+          type: string
+          description: User's configured time zone identifier.
+          example: America/New_York
+        time_format:
+          type: string
+          description: User's preferred time format.
+          enum: ["12hr", "24hr"]
+        first_day_of_week:
+          type: integer
+          description: "First day of week (0=Sunday, 6=Saturday)."
+          minimum: 0
+          maximum: 6
+        plan:
+          type: string
+          description: User's current subscription plan.
+          enum: [free, basic, premium]
+        avatar_url:
+          type: string
+          format: uri
+          nullable: true
+          description: URL to the user's avatar image.
+
+    EventAttendee:
+      type: object
+      description: An attendee of a scheduled event.
+      properties:
+        id:
+          type: string
+          description: Unique attendee identifier.
+        name:
+          type: string
+          description: Attendee's name.
+        email:
+          type: string
+          format: email
+          description: Attendee's email address.
+        time_zone:
+          type: string
+          description: Attendee's time zone.
+        status:
+          type: string
+          description: Attendee's response status.
+          enum: [accepted, declined, tentative, awaiting]
+
+    Payment:
+      type: object
+      description: Payment information associated with an event.
+      properties:
+        amount:
+          type: number
+          description: Payment amount.
+        state:
+          type: string
+          description: Payment state.
+          enum: [awaiting_checkout, paid]
+        stripe_dashboard_url:
+          type: string
+          format: uri
+          nullable: true
+          description: Link to the Stripe dashboard record.
+
+    Conferencing:
+      type: object
+      description: Video conferencing details for an event.
+      properties:
+        join_url:
+          type: string
+          format: uri
+          nullable: true
+          description: URL to join the video call.
+        meeting_id:
+          type: string
+          nullable: true
+          description: Meeting ID for the video call.
+        integration_type:
+          type: string
+          description: The conferencing integration type (e.g., zoom, google_meet).
+          example: zoom
+
+    Scope:
+      type: object
+      description: A team or organizational scope.
+      properties:
+        id:
+          type: string
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
+
+    Event:
+      type: object
+      description: A scheduled event/booking on SavvyCal.
+      properties:
+        id:
+          type: string
+          description: Unique event identifier.
+        status:
+          type: string
+          description: Current status of the event.
+          enum:
+            - confirmed
+            - canceled
+            - awaiting_reschedule
+            - awaiting_checkout
+            - awaiting_approval
+        start_time:
+          type: string
+          format: date-time
+          description: Event start time (ISO 8601).
+        end_time:
+          type: string
+          format: date-time
+          description: Event end time (ISO 8601).
+        duration:
+          type: integer
+          description: Event duration in minutes.
+        buffer_before:
+          type: integer
+          description: Buffer time before the event in minutes.
+          nullable: true
+        buffer_after:
+          type: integer
+          description: Buffer time after the event in minutes.
+          nullable: true
+        original_start_time:
+          type: string
+          format: date-time
+          nullable: true
+          description: Original start time if the event was rescheduled.
+        attendees:
+          type: array
+          description: All event attendees.
+          items:
+            $ref: "#/components/schemas/EventAttendee"
+        conferencing:
+          $ref: "#/components/schemas/Conferencing"
+        payment:
+          $ref: "#/components/schemas/Payment"
+          nullable: true
+        scope:
+          $ref: "#/components/schemas/Scope"
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          description: When the event was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the event was last updated.
+
+    EventList:
+      type: object
+      description: Paginated list of events.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Event"
+        meta:
+          $ref: "#/components/schemas/PaginationMeta"
+
+    CancelEventRequest:
+      type: object
+      description: Request body for canceling an event.
+      properties:
+        reason:
+          type: string
+          description: Optional reason for canceling the event.
+
+    CreateEventRequest:
+      type: object
+      description: Request body for creating a new event via a scheduling link.
+      required:
+        - start_time
+        - attendee
+      properties:
+        start_time:
+          type: string
+          format: date-time
+          description: >
+            The start time for the event. Must match an available slot for
+            the scheduling link.
+        attendee:
+          type: object
+          description: Primary attendee information.
+          required:
+            - name
+            - email
+          properties:
+            name:
+              type: string
+              description: Attendee's full name.
+            email:
+              type: string
+              format: email
+              description: Attendee's email address.
+            time_zone:
+              type: string
+              description: Attendee's time zone.
+              example: America/Chicago
+        duration:
+          type: integer
+          description: Desired duration in minutes (must be one of the link's allowed durations).
+        fields:
+          type: object
+          description: Custom form field responses keyed by field ID.
+          additionalProperties: true
+
+    LinkField:
+      type: object
+      description: A custom form field on a scheduling link.
+      properties:
+        id:
+          type: string
+          description: Field identifier.
+        label:
+          type: string
+          description: Field label shown to the booker.
+        type:
+          type: string
+          description: Field input type.
+          enum: [text, textarea, select, checkbox, phone]
+        required:
+          type: boolean
+          description: Whether the field is required.
+
+    Link:
+      type: object
+      description: A SavvyCal scheduling link for booking appointments.
+      properties:
+        id:
+          type: string
+          description: Unique link identifier.
+        slug:
+          type: string
+          description: URL slug for the scheduling link.
+        name:
+          type: string
+          description: Public-facing name of the scheduling link.
+        private_name:
+          type: string
+          description: Owner-only name for the link.
+          nullable: true
+        description:
+          type: string
+          nullable: true
+          description: Optional description shown to bookers.
+        state:
+          type: string
+          description: Current state of the scheduling link.
+          enum: [active, pending, disabled]
+        default_duration:
+          type: integer
+          description: Default meeting duration in minutes.
+        durations:
+          type: array
+          description: Array of available meeting durations in minutes.
+          items:
+            type: integer
+        increment:
+          type: integer
+          description: Time slot interval in minutes.
+        fields:
+          type: array
+          description: Custom booking form fields.
+          items:
+            $ref: "#/components/schemas/LinkField"
+        scope:
+          $ref: "#/components/schemas/Scope"
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          description: When the link was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the link was last updated.
+
+    LinkList:
+      type: object
+      description: Paginated list of scheduling links.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Link"
+        meta:
+          $ref: "#/components/schemas/PaginationMeta"
+
+    UpdateLinkRequest:
+      type: object
+      description: Request body for updating a scheduling link (all fields optional).
+      properties:
+        name:
+          type: string
+          description: New public-facing name.
+        private_name:
+          type: string
+          description: New owner-only name.
+        description:
+          type: string
+          description: New description.
+        state:
+          type: string
+          enum: [active, pending, disabled]
+          description: New state for the link.
+        default_duration:
+          type: integer
+          description: New default duration in minutes.
+        durations:
+          type: array
+          items:
+            type: integer
+          description: New set of available durations in minutes.
+        increment:
+          type: integer
+          description: New time slot interval in minutes.
+
+    TimeZone:
+      type: object
+      description: A time zone with localized name and DST information.
+      properties:
+        identifier:
+          type: string
+          description: IANA time zone identifier.
+          example: America/New_York
+        name:
+          type: string
+          description: Localized display name for the time zone.
+          example: Eastern Time (US & Canada)
+        utc_offset:
+          type: string
+          description: Current UTC offset (e.g., "-05:00").
+          example: "-05:00"
+        dst:
+          type: boolean
+          description: Whether daylight saving time is currently active.
+
+    TimeZoneList:
+      type: object
+      description: List of time zones.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/TimeZone"
+
+    Webhook:
+      type: object
+      description: A webhook configuration for receiving SavvyCal event notifications.
+      properties:
+        id:
+          type: string
+          description: Unique webhook identifier.
+        url:
+          type: string
+          format: uri
+          description: The endpoint URL where notifications are sent.
+        secret:
+          type: string
+          description: >
+            Secret used for authenticating webhook payloads via
+            HMAC-SHA256 signature in the x-savvycal-signature header.
+        state:
+          type: string
+          description: Current webhook state.
+          enum: [active, disabled, deleted]
+        version:
+          type: string
+          description: Payload format version.
+          example: "2020-11-18"
+        created_at:
+          type: string
+          format: date-time
+          description: When the webhook was created.
+
+    WebhookList:
+      type: object
+      description: Paginated list of webhooks.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Webhook"
+        meta:
+          $ref: "#/components/schemas/PaginationMeta"
+
+    CreateWebhookRequest:
+      type: object
+      description: Request body for creating a new webhook.
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The endpoint URL to receive webhook notifications.
+        events:
+          type: array
+          description: List of event types to subscribe to. Subscribes to all if omitted.
+          items:
+            type: string
+            enum:
+              - event.created
+              - event.requested
+              - event.approved
+              - event.declined
+              - event.rescheduled
+              - event.changed
+              - event.canceled
+              - event.checkout.pending
+              - event.checkout.expired
+              - event.checkout.completed
+              - event.attendee.added
+              - event.attendee.canceled
+              - event.attendee.rescheduled
+              - poll.response.created
+              - poll.response.updated
+              - workflow.action.triggered
+
+    Workflow:
+      type: object
+      description: An automation workflow in SavvyCal.
+      properties:
+        id:
+          type: string
+          description: Unique workflow identifier.
+        name:
+          type: string
+          description: Workflow name.
+        state:
+          type: string
+          description: Current workflow state.
+          enum: [active, disabled]
+        scope:
+          $ref: "#/components/schemas/Scope"
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          description: When the workflow was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the workflow was last updated.
+
+    WorkflowList:
+      type: object
+      description: Paginated list of workflows.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Workflow"
+        meta:
+          $ref: "#/components/schemas/PaginationMeta"
+
+    PaginationMeta:
+      type: object
+      description: Pagination metadata for list responses.
+      properties:
+        current_page:
+          type: integer
+          description: Current page number.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        total_count:
+          type: integer
+          description: Total number of items.
+        total_pages:
+          type: integer
+          description: Total number of pages.

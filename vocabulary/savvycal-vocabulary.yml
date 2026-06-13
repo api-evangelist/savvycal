@@ -1,0 +1,153 @@
+vocabulary:
+  - term: scheduling_link
+    label: Scheduling Link
+    definition: >
+      A shareable URL that allows others to book time with a SavvyCal user.
+      Scheduling links define available durations, time slot increments,
+      custom form fields, and optional team scope associations.
+    related:
+      - link
+      - booking_page
+      - slug
+
+  - term: event
+    label: Event
+    definition: >
+      A confirmed or pending booking created through a SavvyCal scheduling
+      link. Events capture attendee information, start/end times, conferencing
+      details, and payment status. Events pass through a lifecycle of statuses
+      including confirmed, canceled, awaiting_reschedule, awaiting_checkout,
+      and awaiting_approval.
+    related:
+      - booking
+      - meeting
+      - attendee
+
+  - term: attendee
+    label: Attendee
+    definition: >
+      A person who participates in a scheduled event. Attendees have a name,
+      email, time zone, and response status (accepted, declined, tentative,
+      or awaiting).
+    related:
+      - event
+      - organizer
+
+  - term: webhook
+    label: Webhook
+    definition: >
+      An HTTP callback that SavvyCal sends to a user-specified URL when
+      specific events occur. Webhook payloads are signed using HMAC-SHA256
+      and include a x-savvycal-signature header for verification.
+    related:
+      - event_type
+      - notification
+      - signature
+
+  - term: workflow
+    label: Workflow
+    definition: >
+      An automation configuration in SavvyCal that defines actions to be
+      triggered when specific scheduling events occur (e.g., sending reminder
+      emails, updating CRM records). Workflows are scoped to a team or
+      individual user.
+    related:
+      - automation
+      - action
+      - trigger
+
+  - term: scope
+    label: Scope
+    definition: >
+      A team or organizational grouping within SavvyCal. Scheduling links,
+      workflows, and events can be associated with a scope, enabling
+      team-level management of scheduling resources.
+    related:
+      - team
+      - organization
+
+  - term: personal_access_token
+    label: Personal Access Token
+    definition: >
+      An API credential tied to a specific SavvyCal user account, prefixed
+      with `pt_secret_`. Used in the Authorization header as a Bearer token
+      for direct API access without OAuth flows.
+    related:
+      - authentication
+      - bearer_token
+      - oauth
+
+  - term: oauth
+    label: OAuth 2.0
+    definition: >
+      The authorization protocol used by SavvyCal for third-party
+      integrations. Supports the authorization code flow. Access tokens
+      expire after 2 hours; refresh tokens are long-lived and used to
+      obtain new access tokens.
+    related:
+      - access_token
+      - refresh_token
+      - authorization_code
+
+  - term: time_zone
+    label: Time Zone
+    definition: >
+      An IANA time zone identifier (e.g., America/New_York) with associated
+      localized display name and DST (daylight saving time) status.
+      SavvyCal uses time zones to display availability in each user's
+      local time.
+    related:
+      - iana
+      - dst
+      - utc_offset
+
+  - term: duration
+    label: Duration
+    definition: >
+      The length of a scheduled meeting in minutes. Scheduling links define
+      a default_duration and optionally offer multiple durations for the
+      booker to choose from.
+    related:
+      - scheduling_link
+      - increment
+
+  - term: increment
+    label: Increment
+    definition: >
+      The time slot interval in minutes for a scheduling link, determining
+      how frequently available slots appear on the booking page
+      (e.g., every 15 minutes).
+    related:
+      - scheduling_link
+      - duration
+      - availability
+
+  - term: slug
+    label: Slug
+    definition: >
+      The URL-friendly identifier used in the shareable booking page URL
+      for a scheduling link (e.g., `username/30-minute-meeting`).
+    related:
+      - scheduling_link
+      - url
+
+  - term: conferencing
+    label: Conferencing
+    definition: >
+      Video meeting integration details attached to an event, including
+      the join URL and meeting ID from providers such as Zoom or Google Meet.
+    related:
+      - zoom
+      - google_meet
+      - join_url
+
+  - term: webhook_signature
+    label: Webhook Signature
+    definition: >
+      An HMAC-SHA256 hash of the webhook payload, sent in the
+      x-savvycal-signature header as `sha256=<hash>`. Used to verify
+      that the webhook originated from SavvyCal.
+    related:
+      - webhook
+      - hmac
+      - security

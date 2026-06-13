@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.savvycal.com/v1/schemas/user",
+  "title": "User",
+  "description": "A SavvyCal user account.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique user identifier."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "User's email address."
+    },
+    "first_name": {
+      "type": "string",
+      "description": "User's first name."
+    },
+    "last_name": {
+      "type": "string",
+      "description": "User's last name."
+    },
+    "display_name": {
+      "type": "string",
+      "description": "User's full display name."
+    },
+    "time_zone": {
+      "type": "string",
+      "description": "User's configured IANA time zone identifier.",
+      "example": "America/New_York"
+    },
+    "time_format": {
+      "type": "string",
+      "description": "User's preferred time format.",
+      "enum": ["12hr", "24hr"]
+    },
+    "first_day_of_week": {
+      "type": "integer",
+      "description": "First day of week (0=Sunday through 6=Saturday).",
+      "minimum": 0,
+      "maximum": 6
+    },
+    "plan": {
+      "type": "string",
+      "description": "User's current subscription plan.",
+      "enum": ["free", "basic", "premium"]
+    },
+    "avatar_url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "URL to the user's avatar image."
+    }
+  },
+  "required": [
+    "id",
+    "email",
+    "first_name",
+    "last_name",
+    "display_name",
+    "time_zone",
+    "time_format",
+    "first_day_of_week",
+    "plan"
+  ]
+}

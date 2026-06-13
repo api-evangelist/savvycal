@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.savvycal.com/v1/schemas/webhook",
+  "title": "Webhook",
+  "description": "A webhook configuration for receiving SavvyCal event notifications.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique webhook identifier."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The endpoint URL where notifications are sent."
+    },
+    "secret": {
+      "type": "string",
+      "description": "Secret used for HMAC-SHA256 payload authentication via x-savvycal-signature header."
+    },
+    "state": {
+      "type": "string",
+      "description": "Current webhook state.",
+      "enum": ["active", "disabled", "deleted"]
+    },
+    "version": {
+      "type": "string",
+      "description": "Payload format version.",
+      "example": "2020-11-18"
+    },
+    "events": {
+      "type": "array",
+      "description": "Subscribed event types.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "event.created",
+          "event.requested",
+          "event.approved",
+          "event.declined",
+          "event.rescheduled",
+          "event.changed",
+          "event.canceled",
+          "event.checkout.pending",
+          "event.checkout.expired",
+          "event.checkout.completed",
+          "event.attendee.added",
+          "event.attendee.canceled",
+          "event.attendee.rescheduled",
+          "poll.response.created",
+          "poll.response.updated",
+          "workflow.action.triggered"
+        ]
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the webhook was created."
+    }
+  },
+  "required": ["id", "url", "secret", "state", "version", "created_at"]
+}

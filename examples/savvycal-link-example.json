@@ -1,0 +1,32 @@
+{
+  "id": "lnk_01h8x9k2m3n4p5q6r7s8t9u0w1",
+  "slug": "30-minute-meeting",
+  "name": "30 Minute Meeting",
+  "private_name": "Standard Demo Call",
+  "description": "A quick 30-minute call to discuss your needs.",
+  "state": "active",
+  "default_duration": 30,
+  "durations": [15, 30, 45],
+  "increment": 15,
+  "fields": [
+    {
+      "id": "fld_01h8x9k2m3n4p5q6r7s8t9u0w2",
+      "label": "Company",
+      "type": "text",
+      "required": true
+    },
+    {
+      "id": "fld_01h8x9k2m3n4p5q6r7s8t9u0w3",
+      "label": "What would you like to discuss?",
+      "type": "textarea",
+      "required": false
+    }
+  ],
+  "scope": {
+    "id": "scp_01h8x9k2m3n4p5q6r7s8t9u0v3",
+    "name": "Sales Team",
+    "slug": "sales-team"
+  },
+  "created_at": "2026-01-15T09:00:00Z",
+  "updated_at": "2026-06-01T11:30:00Z"
+}

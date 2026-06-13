@@ -1,0 +1,86 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "sc": "https://schema.org/",
+    "savvy": "https://api.savvycal.com/v1/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Event": "sc:Event",
+    "id": "@id",
+    "status": "savvy:status",
+    "start_time": {
+      "@id": "sc:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "end_time": {
+      "@id": "sc:endDate",
+      "@type": "xsd:dateTime"
+    },
+    "duration": {
+      "@id": "sc:duration",
+      "@type": "xsd:integer"
+    },
+    "attendees": {
+      "@id": "sc:attendee",
+      "@container": "@set"
+    },
+    "conferencing": "savvy:conferencing",
+    "payment": "savvy:payment",
+    "scope": "savvy:scope",
+    "created_at": {
+      "@id": "sc:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "sc:dateModified",
+      "@type": "xsd:dateTime"
+    },
+
+    "EventAttendee": "sc:Person",
+    "name": "sc:name",
+    "email": "sc:email",
+    "time_zone": "savvy:timeZone",
+
+    "Link": "savvy:SchedulingLink",
+    "slug": "savvy:slug",
+    "description": "sc:description",
+    "default_duration": "savvy:defaultDuration",
+    "durations": "savvy:durations",
+    "increment": "savvy:increment",
+    "fields": "savvy:fields",
+    "state": "savvy:state",
+    "private_name": "savvy:privateName",
+
+    "Webhook": "savvy:Webhook",
+    "url": "sc:url",
+    "secret": "savvy:webhookSecret",
+    "version": "savvy:payloadVersion",
+
+    "User": "sc:Person",
+    "first_name": "sc:givenName",
+    "last_name": "sc:familyName",
+    "display_name": "sc:name",
+    "time_format": "savvy:timeFormat",
+    "first_day_of_week": "savvy:firstDayOfWeek",
+    "plan": "savvy:subscriptionPlan",
+    "avatar_url": "sc:image",
+
+    "Workflow": "savvy:Workflow",
+
+    "Scope": "sc:Organization",
+
+    "TimeZone": "savvy:TimeZone",
+    "identifier": "sc:identifier",
+    "utc_offset": "savvy:utcOffset",
+    "dst": "savvy:daylightSavingTime",
+
+    "Conferencing": "savvy:Conferencing",
+    "join_url": "savvy:joinUrl",
+    "meeting_id": "savvy:meetingId",
+    "integration_type": "savvy:integrationType",
+
+    "Payment": "sc:Invoice",
+    "amount": "sc:totalPaymentDue",
+    "stripe_dashboard_url": "savvy:stripeDashboardUrl"
+  }
+}

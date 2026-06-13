@@ -43,6 +43,8 @@ apis:
         url: https://developers.savvycal.com/
       - type: Authentication
         url: https://developers.savvycal.com/authentication
+      - type: OpenAPI
+        url: openapi/savvycal-meetings-openapi.yml
 
 common:
   - type: Website
@@ -67,6 +69,20 @@ common:
     url: rate-limits/savvycal-rate-limits.yml
   - type: FinOps
     url: finops/savvycal-finops.yml
+  - type: Vocabulary
+    url: vocabulary/savvycal-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/savvycal-context.jsonld
+  - type: JSONSchema
+    url: json-schema/savvycal-event-schema.json
+  - type: JSONSchema
+    url: json-schema/savvycal-link-schema.json
+  - type: JSONSchema
+    url: json-schema/savvycal-webhook-schema.json
+  - type: JSONSchema
+    url: json-schema/savvycal-user-schema.json
+  - type: BlogFeed
+    url: https://savvycal.com/feed.xml
 
 maintainers:
   - FN: Kin Lane

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.savvycal.com/v1/schemas/link",
+  "title": "Link",
+  "description": "A SavvyCal scheduling link for booking appointments.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique link identifier."
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL slug for the scheduling link."
+    },
+    "name": {
+      "type": "string",
+      "description": "Public-facing name of the scheduling link."
+    },
+    "private_name": {
+      "type": ["string", "null"],
+      "description": "Owner-only name for the link."
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Optional description shown to bookers."
+    },
+    "state": {
+      "type": "string",
+      "description": "Current state of the scheduling link.",
+      "enum": ["active", "pending", "disabled"]
+    },
+    "default_duration": {
+      "type": "integer",
+      "description": "Default meeting duration in minutes.",
+      "minimum": 1
+    },
+    "durations": {
+      "type": "array",
+      "description": "Array of available meeting durations in minutes.",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "increment": {
+      "type": "integer",
+      "description": "Time slot interval in minutes.",
+      "minimum": 1
+    },
+    "fields": {
+      "type": "array",
+      "description": "Custom booking form fields.",
+      "items": {
+        "$ref": "#/$defs/LinkField"
+      }
+    },
+    "scope": {
+      "oneOf": [
+        { "$ref": "#/$defs/Scope" },
+        { "type": "null" }
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the link was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the link was last updated."
+    }
+  },
+  "required": ["id", "slug", "name", "state", "default_duration", "durations", "increment"],
+  "$defs": {
+    "LinkField": {
+      "title": "LinkField",
+      "description": "A custom form field on a scheduling link.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["text", "textarea", "select", "checkbox", "phone"]
+        },
+        "required": { "type": "boolean" }
+      },
+      "required": ["id", "label", "type", "required"]
+    },
+    "Scope": {
+      "title": "Scope",
+      "description": "A team or organizational scope.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "slug": { "type": "string" }
+      },
+      "required": ["id", "name", "slug"]
+    }
+  }
+}

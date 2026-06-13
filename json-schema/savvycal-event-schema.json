@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.savvycal.com/v1/schemas/event",
+  "title": "Event",
+  "description": "A scheduled event/booking on SavvyCal.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique event identifier."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the event.",
+      "enum": [
+        "confirmed",
+        "canceled",
+        "awaiting_reschedule",
+        "awaiting_checkout",
+        "awaiting_approval"
+      ]
+    },
+    "start_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Event start time in ISO 8601 format."
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Event end time in ISO 8601 format."
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Event duration in minutes.",
+      "minimum": 1
+    },
+    "buffer_before": {
+      "type": ["integer", "null"],
+      "description": "Buffer time before the event in minutes."
+    },
+    "buffer_after": {
+      "type": ["integer", "null"],
+      "description": "Buffer time after the event in minutes."
+    },
+    "original_start_time": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Original start time if the event was rescheduled."
+    },
+    "attendees": {
+      "type": "array",
+      "description": "All event attendees.",
+      "items": {
+        "$ref": "#/$defs/EventAttendee"
+      }
+    },
+    "conferencing": {
+      "$ref": "#/$defs/Conferencing"
+    },
+    "payment": {
+      "oneOf": [
+        { "$ref": "#/$defs/Payment" },
+        { "type": "null" }
+      ]
+    },
+    "scope": {
+      "oneOf": [
+        { "$ref": "#/$defs/Scope" },
+        { "type": "null" }
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the event was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the event was last updated."
+    }
+  },
+  "required": ["id", "status", "start_time", "end_time", "duration", "attendees"],
+  "$defs": {
+    "EventAttendee": {
+      "title": "EventAttendee",
+      "description": "An attendee of a scheduled event.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique attendee identifier." },
+        "name": { "type": "string", "description": "Attendee's name." },
+        "email": { "type": "string", "format": "email", "description": "Attendee's email." },
+        "time_zone": { "type": "string", "description": "Attendee's time zone." },
+        "status": {
+          "type": "string",
+          "enum": ["accepted", "declined", "tentative", "awaiting"],
+          "description": "Attendee's response status."
+        }
+      },
+      "required": ["name", "email"]
+    },
+    "Conferencing": {
+      "title": "Conferencing",
+      "description": "Video conferencing details for an event.",
+      "type": "object",
+      "properties": {
+        "join_url": { "type": ["string", "null"], "format": "uri" },
+        "meeting_id": { "type": ["string", "null"] },
+        "integration_type": { "type": "string", "example": "zoom" }
+      }
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Payment information associated with an event.",
+      "type": "object",
+      "properties": {
+        "amount": { "type": "number" },
+        "state": { "type": "string", "enum": ["awaiting_checkout", "paid"] },
+        "stripe_dashboard_url": { "type": ["string", "null"], "format": "uri" }
+      }
+    },
+    "Scope": {
+      "title": "Scope",
+      "description": "A team or organizational scope.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "slug": { "type": "string" }
+      },
+      "required": ["id", "name", "slug"]
+    }
+  }
+}
