@@ -5,46 +5,177 @@
   "last_fetched": "2026-06-13",
   "post_count": 65,
   "posts": [
-    { "date": "2023-03-29", "url": "https://savvycal.com/articles/work-schedule-apps/" },
-    { "date": "2023-03-17", "url": "https://savvycal.com/articles/free-online-calendars/" },
-    { "date": "2023-03-07", "url": "https://savvycal.com/articles/interview-invitation-email/" },
-    { "date": "2023-02-21", "url": "https://savvycal.com/articles/lead-generation-for-b2b/" },
-    { "date": "2022-10-24", "url": "https://savvycal.com/articles/time-management-techniques/" },
-    { "date": "2022-10-24", "url": "https://savvycal.com/articles/remote-work-culture/" },
-    { "date": "2022-10-20", "url": "https://savvycal.com/articles/team-productivity-apps-tools/" },
-    { "date": "2022-09-07", "url": "https://savvycal.com/articles/scheduling-conflicts/" },
-    { "date": "2022-09-07", "url": "https://savvycal.com/articles/schedule-skype-meeting/" },
-    { "date": "2022-08-03", "url": "https://savvycal.com/articles/calendar-spam/" },
-    { "date": "2022-07-18", "url": "https://savvycal.com/articles/best-calendar-apps/" },
-    { "date": "2022-06-29", "url": "https://savvycal.com/articles/calendar-optimization/" },
-    { "date": "2022-06-27", "url": "https://savvycal.com/articles/virtual-meeting-etiquette/" },
-    { "date": "2022-06-27", "url": "https://savvycal.com/articles/how-to-add-google-calendar-to-outlook/" },
-    { "date": "2022-06-27", "url": "https://savvycal.com/articles/time-blocking-templates/" },
-    { "date": "2022-06-27", "url": "https://savvycal.com/articles/how-to-invite-to-zoom-meeting/" },
-    { "date": "2022-06-10", "url": "https://savvycal.com/articles/calendly/" },
-    { "date": "2022-05-19", "url": "https://savvycal.com/articles/when2meet/" },
-    { "date": "2022-05-05", "url": "https://savvycal.com/articles/remote-board-meetings/" },
-    { "date": "2022-04-12", "url": "https://savvycal.com/articles/best-podcasts-to-listen-to-at-work/" },
-    { "date": "2022-04-12", "url": "https://savvycal.com/articles/team-meeting-agenda/" },
-    { "date": "2022-04-12", "url": "https://savvycal.com/articles/how-to-make-staff-meetings-more-engaging/" },
-    { "date": "2022-04-12", "url": "https://savvycal.com/articles/scheduleonce/" },
-    { "date": "2022-03-08", "url": "https://savvycal.com/articles/context-switching/" },
-    { "date": "2022-03-08", "url": "https://savvycal.com/articles/how-to-get-speaking-engagements/" },
-    { "date": "2022-03-08", "url": "https://savvycal.com/articles/acuity/" },
-    { "date": "2022-02-22", "url": "https://savvycal.com/articles/podcast-guest-email-template/" },
-    { "date": "2022-02-21", "url": "https://savvycal.com/articles/how-to-introduce-two-people-over-email/" },
-    { "date": "2022-02-10", "url": "https://savvycal.com/articles/yahoo-calendar/" },
-    { "date": "2022-02-10", "url": "https://savvycal.com/articles/doodle/" },
-    { "date": "2022-02-10", "url": "https://savvycal.com/articles/google-calendar-invite-in-gmail/" },
-    { "date": "2022-02-10", "url": "https://savvycal.com/articles/one-on-one-meeting-template/" },
-    { "date": "2022-01-25", "url": "https://savvycal.com/articles/google-calendar-vs-apple-calendar/" },
-    { "date": "2022-01-25", "url": "https://savvycal.com/articles/reminder-email/" },
-    { "date": "2022-01-21", "url": "https://savvycal.com/articles/best-productivity-chrome-extensions/" },
-    { "date": "2022-01-20", "url": "https://savvycal.com/articles/work-from-home-setup/" },
-    { "date": "2022-01-20", "url": "https://savvycal.com/articles/meeting-invite-templates/" },
-    { "date": "2022-01-14", "url": "https://savvycal.com/articles/automate-sales-meeting-scheduling/" },
-    { "date": "2022-01-10", "url": "https://savvycal.com/articles/follow-up-email-after-meeting/" },
-    { "date": "2022-01-10", "url": "https://savvycal.com/articles/calendly-vs-acuity-scheduling-feature-and-pricing-comparison/" },
-    { "date": "2022-01-10", "url": "https://savvycal.com/articles/meeting-request-emails-templates-examples/" }
-  ]
+    {
+      "date": "2023-03-29",
+      "url": "https://savvycal.com/articles/work-schedule-apps/"
+    },
+    {
+      "date": "2023-03-17",
+      "url": "https://savvycal.com/articles/free-online-calendars/"
+    },
+    {
+      "date": "2023-03-07",
+      "url": "https://savvycal.com/articles/interview-invitation-email/"
+    },
+    {
+      "date": "2023-02-21",
+      "url": "https://savvycal.com/articles/lead-generation-for-b2b/"
+    },
+    {
+      "date": "2022-10-24",
+      "url": "https://savvycal.com/articles/time-management-techniques/"
+    },
+    {
+      "date": "2022-10-24",
+      "url": "https://savvycal.com/articles/remote-work-culture/"
+    },
+    {
+      "date": "2022-10-20",
+      "url": "https://savvycal.com/articles/team-productivity-apps-tools/"
+    },
+    {
+      "date": "2022-09-07",
+      "url": "https://savvycal.com/articles/scheduling-conflicts/"
+    },
+    {
+      "date": "2022-09-07",
+      "url": "https://savvycal.com/articles/schedule-skype-meeting/"
+    },
+    {
+      "date": "2022-08-03",
+      "url": "https://savvycal.com/articles/calendar-spam/"
+    },
+    {
+      "date": "2022-07-18",
+      "url": "https://savvycal.com/articles/best-calendar-apps/"
+    },
+    {
+      "date": "2022-06-29",
+      "url": "https://savvycal.com/articles/calendar-optimization/"
+    },
+    {
+      "date": "2022-06-27",
+      "url": "https://savvycal.com/articles/virtual-meeting-etiquette/"
+    },
+    {
+      "date": "2022-06-27",
+      "url": "https://savvycal.com/articles/how-to-add-google-calendar-to-outlook/"
+    },
+    {
+      "date": "2022-06-27",
+      "url": "https://savvycal.com/articles/time-blocking-templates/"
+    },
+    {
+      "date": "2022-06-27",
+      "url": "https://savvycal.com/articles/how-to-invite-to-zoom-meeting/"
+    },
+    {
+      "date": "2022-06-10",
+      "url": "https://savvycal.com/articles/calendly/"
+    },
+    {
+      "date": "2022-05-19",
+      "url": "https://savvycal.com/articles/when2meet/"
+    },
+    {
+      "date": "2022-05-05",
+      "url": "https://savvycal.com/articles/remote-board-meetings/"
+    },
+    {
+      "date": "2022-04-12",
+      "url": "https://savvycal.com/articles/best-podcasts-to-listen-to-at-work/"
+    },
+    {
+      "date": "2022-04-12",
+      "url": "https://savvycal.com/articles/team-meeting-agenda/"
+    },
+    {
+      "date": "2022-04-12",
+      "url": "https://savvycal.com/articles/how-to-make-staff-meetings-more-engaging/"
+    },
+    {
+      "date": "2022-04-12",
+      "url": "https://savvycal.com/articles/scheduleonce/"
+    },
+    {
+      "date": "2022-03-08",
+      "url": "https://savvycal.com/articles/context-switching/"
+    },
+    {
+      "date": "2022-03-08",
+      "url": "https://savvycal.com/articles/how-to-get-speaking-engagements/"
+    },
+    {
+      "date": "2022-03-08",
+      "url": "https://savvycal.com/articles/acuity/"
+    },
+    {
+      "date": "2022-02-22",
+      "url": "https://savvycal.com/articles/podcast-guest-email-template/"
+    },
+    {
+      "date": "2022-02-21",
+      "url": "https://savvycal.com/articles/how-to-introduce-two-people-over-email/"
+    },
+    {
+      "date": "2022-02-10",
+      "url": "https://savvycal.com/articles/yahoo-calendar/"
+    },
+    {
+      "date": "2022-02-10",
+      "url": "https://savvycal.com/articles/doodle/"
+    },
+    {
+      "date": "2022-02-10",
+      "url": "https://savvycal.com/articles/google-calendar-invite-in-gmail/"
+    },
+    {
+      "date": "2022-02-10",
+      "url": "https://savvycal.com/articles/one-on-one-meeting-template/"
+    },
+    {
+      "date": "2022-01-25",
+      "url": "https://savvycal.com/articles/google-calendar-vs-apple-calendar/"
+    },
+    {
+      "date": "2022-01-25",
+      "url": "https://savvycal.com/articles/reminder-email/"
+    },
+    {
+      "date": "2022-01-21",
+      "url": "https://savvycal.com/articles/best-productivity-chrome-extensions/"
+    },
+    {
+      "date": "2022-01-20",
+      "url": "https://savvycal.com/articles/work-from-home-setup/"
+    },
+    {
+      "date": "2022-01-20",
+      "url": "https://savvycal.com/articles/meeting-invite-templates/"
+    },
+    {
+      "date": "2022-01-14",
+      "url": "https://savvycal.com/articles/automate-sales-meeting-scheduling/"
+    },
+    {
+      "date": "2022-01-10",
+      "url": "https://savvycal.com/articles/follow-up-email-after-meeting/"
+    },
+    {
+      "date": "2022-01-10",
+      "url": "https://savvycal.com/articles/calendly-vs-acuity-scheduling-feature-and-pricing-comparison/"
+    },
+    {
+      "date": "2022-01-10",
+      "url": "https://savvycal.com/articles/meeting-request-emails-templates-examples/"
+    }
+  ],
+  "repo": "savvycal",
+  "feeds": [
+    {
+      "source": "https://www.linkedin.com/company/savvycal",
+      "error": "HTTPError"
+    }
+  ],
+  "fetched": "2026-06-14T20:42:17Z"
 }
