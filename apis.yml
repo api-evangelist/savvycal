@@ -10,7 +10,7 @@ description: >
   JavaScript embed library for embedding scheduling experiences directly into web
   applications.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/savvycal/refs/heads/main/apis.yml
 created: 2026-06-13
 modified: 2026-06-13
@@ -30,7 +30,7 @@ apis:
       The SavvyCal Meetings REST API enables developers to manage scheduling links,
       events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0
       and personal access tokens for authentication and communicates in JSON format.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.savvycal.com/
     baseURL: https://api.savvycal.com/v1
     tags:
