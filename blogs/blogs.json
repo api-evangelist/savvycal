@@ -173,9 +173,17 @@
   "repo": "savvycal",
   "feeds": [
     {
-      "source": "https://www.linkedin.com/company/savvycal",
-      "error": "HTTPError"
+      "source": "https://savvycal.com/blog",
+      "saved": 0,
+      "error": "HTTP 404"
+    },
+    {
+      "source": "https://savvycal.com/feed.xml",
+      "feed_url": "",
+      "saved": 0,
+      "method": "agent-scrape"
     }
   ],
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T13:09:03Z",
+  "agent_pulled": "2026-06-27"
 }
