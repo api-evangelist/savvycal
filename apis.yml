@@ -47,6 +47,14 @@ apis:
         url: openapi/savvycal-meetings-openapi.yml
 
 common:
+  - type: TrustCenter
+    url: security/savvycal-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/savvycal-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/savvycal-domain-security.yml
+  - type: Authentication
+    url: authentication/savvycal-authentication.yml
   - type: Website
     url: https://savvycal.com/
   - type: Documentation

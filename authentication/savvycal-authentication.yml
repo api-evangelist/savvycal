@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/savvycal-meetings-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: 'Personal access tokens (prefixed with `pt_secret_`) or OAuth 2.0 access tokens.
+    Include in the Authorization header as: `Authorization: Bearer <token>`'
+  sources:
+  - openapi/savvycal-meetings-openapi.yml
