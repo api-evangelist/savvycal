@@ -47,6 +47,8 @@ apis:
         url: openapi/savvycal-meetings-openapi.yml
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/savvycal-agentic-access.yml
   - type: TrustCenter
     url: security/savvycal-trust-center.yml
   - type: VulnerabilityDisclosure
