@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: SavvyCal Meetings Current User Time Zones API
+  description: 'The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.
+
+    '
+  version: '1.0'
+  contact:
+    name: SavvyCal Developer Support
+    url: https://developers.savvycal.com/
+  termsOfService: https://savvycal.com/legal/terms
+  license:
+    name: Proprietary
+    url: https://savvycal.com/
+servers:
+- url: https://api.savvycal.com/v1
+  description: SavvyCal API v1
+security:
+- BearerAuth: []
+tags:
+- name: Time Zones
+  description: List and retrieve time zone information.
+paths:
+  /time_zones:
+    get:
+      operationId: listTimeZones
+      summary: List time zones
+      description: Get a list of time zones with localized names and DST information.
+      tags:
+      - Time Zones
+      responses:
+        '200':
+          description: List of time zones.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeZoneList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /time_zones/{segments}:
+    get:
+      operationId: getTimeZone
+      summary: Get time zone
+      description: Get detailed information about a specific time zone.
+      tags:
+      - Time Zones
+      parameters:
+      - name: segments
+        in: path
+        required: true
+        description: 'The time zone identifier path segments (e.g., "America/New_York").
+
+          '
+        schema:
+          type: string
+        example: America/New_York
+      responses:
+        '200':
+          description: Time zone details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeZone'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    TimeZoneList:
+      type: object
+      description: List of time zones.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeZone'
+    TimeZone:
+      type: object
+      description: A time zone with localized name and DST information.
+      properties:
+        identifier:
+          type: string
+          description: IANA time zone identifier.
+          example: America/New_York
+        name:
+          type: string
+          description: Localized display name for the time zone.
+          example: Eastern Time (US & Canada)
+        utc_offset:
+          type: string
+          description: Current UTC offset (e.g., "-05:00").
+          example: -05:00
+        dst:
+          type: boolean
+          description: Whether daylight saving time is currently active.
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Personal access tokens (prefixed with `pt_secret_`) or OAuth 2.0 access tokens. Include in the Authorization header as: `Authorization: Bearer <token>`
+
+        '

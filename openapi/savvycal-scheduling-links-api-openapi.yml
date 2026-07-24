@@ -1,0 +1,321 @@
+openapi: 3.0.3
+info:
+  title: SavvyCal Meetings Current User Scheduling Links API
+  description: 'The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.
+
+    '
+  version: '1.0'
+  contact:
+    name: SavvyCal Developer Support
+    url: https://developers.savvycal.com/
+  termsOfService: https://savvycal.com/legal/terms
+  license:
+    name: Proprietary
+    url: https://savvycal.com/
+servers:
+- url: https://api.savvycal.com/v1
+  description: SavvyCal API v1
+security:
+- BearerAuth: []
+tags:
+- name: Scheduling Links
+  description: Create and manage scheduling links for booking.
+paths:
+  /links:
+    get:
+      operationId: listSchedulingLinks
+      summary: List scheduling links
+      description: Get a paginated list of scheduling links for the authenticated user.
+      tags:
+      - Scheduling Links
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination.
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        description: Number of results per page.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: Paginated list of scheduling links.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /links/{link_id}:
+    get:
+      operationId: getSchedulingLink
+      summary: Get scheduling link
+      description: Get a specific scheduling link by ID.
+      tags:
+      - Scheduling Links
+      parameters:
+      - $ref: '#/components/parameters/LinkId'
+      responses:
+        '200':
+          description: Scheduling link details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateSchedulingLink
+      summary: Update scheduling link
+      description: Update an existing scheduling link.
+      tags:
+      - Scheduling Links
+      parameters:
+      - $ref: '#/components/parameters/LinkId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLinkRequest'
+      responses:
+        '200':
+          description: Updated scheduling link.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+components:
+  schemas:
+    UpdateLinkRequest:
+      type: object
+      description: Request body for updating a scheduling link (all fields optional).
+      properties:
+        name:
+          type: string
+          description: New public-facing name.
+        private_name:
+          type: string
+          description: New owner-only name.
+        description:
+          type: string
+          description: New description.
+        state:
+          type: string
+          enum:
+          - active
+          - pending
+          - disabled
+          description: New state for the link.
+        default_duration:
+          type: integer
+          description: New default duration in minutes.
+        durations:
+          type: array
+          items:
+            type: integer
+          description: New set of available durations in minutes.
+        increment:
+          type: integer
+          description: New time slot interval in minutes.
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    PaginationMeta:
+      type: object
+      description: Pagination metadata for list responses.
+      properties:
+        current_page:
+          type: integer
+          description: Current page number.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        total_count:
+          type: integer
+          description: Total number of items.
+        total_pages:
+          type: integer
+          description: Total number of pages.
+    LinkList:
+      type: object
+      description: Paginated list of scheduling links.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    Scope:
+      type: object
+      description: A team or organizational scope.
+      properties:
+        id:
+          type: string
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
+    LinkField:
+      type: object
+      description: A custom form field on a scheduling link.
+      properties:
+        id:
+          type: string
+          description: Field identifier.
+        label:
+          type: string
+          description: Field label shown to the booker.
+        type:
+          type: string
+          description: Field input type.
+          enum:
+          - text
+          - textarea
+          - select
+          - checkbox
+          - phone
+        required:
+          type: boolean
+          description: Whether the field is required.
+    Link:
+      type: object
+      description: A SavvyCal scheduling link for booking appointments.
+      properties:
+        id:
+          type: string
+          description: Unique link identifier.
+        slug:
+          type: string
+          description: URL slug for the scheduling link.
+        name:
+          type: string
+          description: Public-facing name of the scheduling link.
+        private_name:
+          type: string
+          description: Owner-only name for the link.
+          nullable: true
+        description:
+          type: string
+          nullable: true
+          description: Optional description shown to bookers.
+        state:
+          type: string
+          description: Current state of the scheduling link.
+          enum:
+          - active
+          - pending
+          - disabled
+        default_duration:
+          type: integer
+          description: Default meeting duration in minutes.
+        durations:
+          type: array
+          description: Array of available meeting durations in minutes.
+          items:
+            type: integer
+        increment:
+          type: integer
+          description: Time slot interval in minutes.
+        fields:
+          type: array
+          description: Custom booking form fields.
+          items:
+            $ref: '#/components/schemas/LinkField'
+        scope:
+          $ref: '#/components/schemas/Scope'
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          description: When the link was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the link was last updated.
+  responses:
+    UnprocessableEntity:
+      description: Validation errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Insufficient permissions to access the resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    LinkId:
+      name: link_id
+      in: path
+      required: true
+      description: The unique identifier of the scheduling link.
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Personal access tokens (prefixed with `pt_secret_`) or OAuth 2.0 access tokens. Include in the Authorization header as: `Authorization: Bearer <token>`
+
+        '

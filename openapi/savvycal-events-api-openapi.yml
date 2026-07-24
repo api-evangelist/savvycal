@@ -1,0 +1,393 @@
+openapi: 3.0.3
+info:
+  title: SavvyCal Meetings Current User Events API
+  description: 'The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.
+
+    '
+  version: '1.0'
+  contact:
+    name: SavvyCal Developer Support
+    url: https://developers.savvycal.com/
+  termsOfService: https://savvycal.com/legal/terms
+  license:
+    name: Proprietary
+    url: https://savvycal.com/
+servers:
+- url: https://api.savvycal.com/v1
+  description: SavvyCal API v1
+security:
+- BearerAuth: []
+tags:
+- name: Events
+  description: Manage scheduled events and bookings.
+paths:
+  /events:
+    get:
+      operationId: listEvents
+      summary: List events
+      description: List your events scheduled via SavvyCal.
+      tags:
+      - Events
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination.
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        description: Number of results per page.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: Paginated list of events.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /events/{event_id}:
+    get:
+      operationId: getEvent
+      summary: Get event
+      description: Fetch a single event by its ID.
+      tags:
+      - Events
+      parameters:
+      - $ref: '#/components/parameters/EventId'
+      responses:
+        '200':
+          description: Event details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /events/{event_id}/cancel:
+    post:
+      operationId: cancelEvent
+      summary: Cancel event
+      description: Cancel an event by its ID.
+      tags:
+      - Events
+      parameters:
+      - $ref: '#/components/parameters/EventId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelEventRequest'
+      responses:
+        '200':
+          description: Event successfully canceled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /links/{link_id}/events:
+    post:
+      operationId: createEvent
+      summary: Create event
+      description: 'Create a new event via a scheduling link. You can only create events that match an available time slot for the underlying scheduling link. Use the List Available Slots endpoint to find suitable times.
+
+        '
+      tags:
+      - Events
+      parameters:
+      - $ref: '#/components/parameters/LinkId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEventRequest'
+      responses:
+        '200':
+          description: Event successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+components:
+  schemas:
+    CreateEventRequest:
+      type: object
+      description: Request body for creating a new event via a scheduling link.
+      required:
+      - start_time
+      - attendee
+      properties:
+        start_time:
+          type: string
+          format: date-time
+          description: 'The start time for the event. Must match an available slot for the scheduling link.
+
+            '
+        attendee:
+          type: object
+          description: Primary attendee information.
+          required:
+          - name
+          - email
+          properties:
+            name:
+              type: string
+              description: Attendee's full name.
+            email:
+              type: string
+              format: email
+              description: Attendee's email address.
+            time_zone:
+              type: string
+              description: Attendee's time zone.
+              example: America/Chicago
+        duration:
+          type: integer
+          description: Desired duration in minutes (must be one of the link's allowed durations).
+        fields:
+          type: object
+          description: Custom form field responses keyed by field ID.
+          additionalProperties: true
+    EventAttendee:
+      type: object
+      description: An attendee of a scheduled event.
+      properties:
+        id:
+          type: string
+          description: Unique attendee identifier.
+        name:
+          type: string
+          description: Attendee's name.
+        email:
+          type: string
+          format: email
+          description: Attendee's email address.
+        time_zone:
+          type: string
+          description: Attendee's time zone.
+        status:
+          type: string
+          description: Attendee's response status.
+          enum:
+          - accepted
+          - declined
+          - tentative
+          - awaiting
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    Conferencing:
+      type: object
+      description: Video conferencing details for an event.
+      properties:
+        join_url:
+          type: string
+          format: uri
+          nullable: true
+          description: URL to join the video call.
+        meeting_id:
+          type: string
+          nullable: true
+          description: Meeting ID for the video call.
+        integration_type:
+          type: string
+          description: The conferencing integration type (e.g., zoom, google_meet).
+          example: zoom
+    PaginationMeta:
+      type: object
+      description: Pagination metadata for list responses.
+      properties:
+        current_page:
+          type: integer
+          description: Current page number.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        total_count:
+          type: integer
+          description: Total number of items.
+        total_pages:
+          type: integer
+          description: Total number of pages.
+    CancelEventRequest:
+      type: object
+      description: Request body for canceling an event.
+      properties:
+        reason:
+          type: string
+          description: Optional reason for canceling the event.
+    Event:
+      type: object
+      description: A scheduled event/booking on SavvyCal.
+      properties:
+        id:
+          type: string
+          description: Unique event identifier.
+        status:
+          type: string
+          description: Current status of the event.
+          enum:
+          - confirmed
+          - canceled
+          - awaiting_reschedule
+          - awaiting_checkout
+          - awaiting_approval
+        start_time:
+          type: string
+          format: date-time
+          description: Event start time (ISO 8601).
+        end_time:
+          type: string
+          format: date-time
+          description: Event end time (ISO 8601).
+        duration:
+          type: integer
+          description: Event duration in minutes.
+        buffer_before:
+          type: integer
+          description: Buffer time before the event in minutes.
+          nullable: true
+        buffer_after:
+          type: integer
+          description: Buffer time after the event in minutes.
+          nullable: true
+        original_start_time:
+          type: string
+          format: date-time
+          nullable: true
+          description: Original start time if the event was rescheduled.
+        attendees:
+          type: array
+          description: All event attendees.
+          items:
+            $ref: '#/components/schemas/EventAttendee'
+        conferencing:
+          $ref: '#/components/schemas/Conferencing'
+        payment:
+          $ref: '#/components/schemas/Payment'
+          nullable: true
+        scope:
+          $ref: '#/components/schemas/Scope'
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          description: When the event was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the event was last updated.
+    EventList:
+      type: object
+      description: Paginated list of events.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    Payment:
+      type: object
+      description: Payment information associated with an event.
+      properties:
+        amount:
+          type: number
+          description: Payment amount.
+        state:
+          type: string
+          description: Payment state.
+          enum:
+          - awaiting_checkout
+          - paid
+        stripe_dashboard_url:
+          type: string
+          format: uri
+          nullable: true
+          description: Link to the Stripe dashboard record.
+    Scope:
+      type: object
+      description: A team or organizational scope.
+      properties:
+        id:
+          type: string
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: Validation errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    EventId:
+      name: event_id
+      in: path
+      required: true
+      description: The unique identifier of the event.
+      schema:
+        type: string
+    LinkId:
+      name: link_id
+      in: path
+      required: true
+      description: The unique identifier of the scheduling link.
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Personal access tokens (prefixed with `pt_secret_`) or OAuth 2.0 access tokens. Include in the Authorization header as: `Authorization: Bearer <token>`
+
+        '

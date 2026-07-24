@@ -1,0 +1,252 @@
+openapi: 3.0.3
+info:
+  title: SavvyCal Meetings Current User Webhooks API
+  description: 'The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.
+
+    '
+  version: '1.0'
+  contact:
+    name: SavvyCal Developer Support
+    url: https://developers.savvycal.com/
+  termsOfService: https://savvycal.com/legal/terms
+  license:
+    name: Proprietary
+    url: https://savvycal.com/
+servers:
+- url: https://api.savvycal.com/v1
+  description: SavvyCal API v1
+security:
+- BearerAuth: []
+tags:
+- name: Webhooks
+  description: Configure webhooks for real-time event notifications.
+paths:
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      summary: List webhooks
+      description: Get a paginated list of webhooks for the authenticated user.
+      tags:
+      - Webhooks
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination.
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        description: Number of results per page.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: Paginated list of webhooks.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createWebhook
+      summary: Create webhook
+      description: Create a new webhook for receiving event notifications.
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookRequest'
+      responses:
+        '201':
+          description: Webhook successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /webhooks/{webhook_id}:
+    get:
+      operationId: getWebhook
+      summary: Get webhook
+      description: Get a specific webhook by ID.
+      tags:
+      - Webhooks
+      parameters:
+      - $ref: '#/components/parameters/WebhookId'
+      responses:
+        '200':
+          description: Webhook details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteWebhook
+      summary: Delete webhook
+      description: Delete an existing webhook.
+      tags:
+      - Webhooks
+      parameters:
+      - $ref: '#/components/parameters/WebhookId'
+      responses:
+        '200':
+          description: Webhook successfully deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Webhook:
+      type: object
+      description: A webhook configuration for receiving SavvyCal event notifications.
+      properties:
+        id:
+          type: string
+          description: Unique webhook identifier.
+        url:
+          type: string
+          format: uri
+          description: The endpoint URL where notifications are sent.
+        secret:
+          type: string
+          description: 'Secret used for authenticating webhook payloads via HMAC-SHA256 signature in the x-savvycal-signature header.
+
+            '
+        state:
+          type: string
+          description: Current webhook state.
+          enum:
+          - active
+          - disabled
+          - deleted
+        version:
+          type: string
+          description: Payload format version.
+          example: '2020-11-18'
+        created_at:
+          type: string
+          format: date-time
+          description: When the webhook was created.
+    CreateWebhookRequest:
+      type: object
+      description: Request body for creating a new webhook.
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The endpoint URL to receive webhook notifications.
+        events:
+          type: array
+          description: List of event types to subscribe to. Subscribes to all if omitted.
+          items:
+            type: string
+            enum:
+            - event.created
+            - event.requested
+            - event.approved
+            - event.declined
+            - event.rescheduled
+            - event.changed
+            - event.canceled
+            - event.checkout.pending
+            - event.checkout.expired
+            - event.checkout.completed
+            - event.attendee.added
+            - event.attendee.canceled
+            - event.attendee.rescheduled
+            - poll.response.created
+            - poll.response.updated
+            - workflow.action.triggered
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    PaginationMeta:
+      type: object
+      description: Pagination metadata for list responses.
+      properties:
+        current_page:
+          type: integer
+          description: Current page number.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        total_count:
+          type: integer
+          description: Total number of items.
+        total_pages:
+          type: integer
+          description: Total number of pages.
+    WebhookList:
+      type: object
+      description: Paginated list of webhooks.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    WebhookId:
+      name: webhook_id
+      in: path
+      required: true
+      description: The unique identifier of the webhook.
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Personal access tokens (prefixed with `pt_secret_`) or OAuth 2.0 access tokens. Include in the Authorization header as: `Authorization: Bearer <token>`
+
+        '

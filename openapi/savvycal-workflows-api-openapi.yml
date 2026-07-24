@@ -1,0 +1,184 @@
+openapi: 3.0.3
+info:
+  title: SavvyCal Meetings Current User Workflows API
+  description: 'The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.
+
+    '
+  version: '1.0'
+  contact:
+    name: SavvyCal Developer Support
+    url: https://developers.savvycal.com/
+  termsOfService: https://savvycal.com/legal/terms
+  license:
+    name: Proprietary
+    url: https://savvycal.com/
+servers:
+- url: https://api.savvycal.com/v1
+  description: SavvyCal API v1
+security:
+- BearerAuth: []
+tags:
+- name: Workflows
+  description: Manage automation workflows.
+paths:
+  /workflows:
+    get:
+      operationId: listWorkflows
+      summary: List workflows
+      description: 'Get a paginated list of workflows for scopes the authenticated user manages.
+
+        '
+      tags:
+      - Workflows
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination.
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        description: Number of results per page.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: Paginated list of workflows.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /workflows/{workflow_id}:
+    get:
+      operationId: getWorkflow
+      summary: Get workflow
+      description: Get a specific workflow by ID.
+      tags:
+      - Workflows
+      parameters:
+      - name: workflow_id
+        in: path
+        required: true
+        description: The unique identifier of the workflow.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Workflow details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    PaginationMeta:
+      type: object
+      description: Pagination metadata for list responses.
+      properties:
+        current_page:
+          type: integer
+          description: Current page number.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        total_count:
+          type: integer
+          description: Total number of items.
+        total_pages:
+          type: integer
+          description: Total number of pages.
+    WorkflowList:
+      type: object
+      description: Paginated list of workflows.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Workflow'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    Workflow:
+      type: object
+      description: An automation workflow in SavvyCal.
+      properties:
+        id:
+          type: string
+          description: Unique workflow identifier.
+        name:
+          type: string
+          description: Workflow name.
+        state:
+          type: string
+          description: Current workflow state.
+          enum:
+          - active
+          - disabled
+        scope:
+          $ref: '#/components/schemas/Scope'
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          description: When the workflow was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the workflow was last updated.
+    Scope:
+      type: object
+      description: A team or organizational scope.
+      properties:
+        id:
+          type: string
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Personal access tokens (prefixed with `pt_secret_`) or OAuth 2.0 access tokens. Include in the Authorization header as: `Authorization: Bearer <token>`
+
+        '

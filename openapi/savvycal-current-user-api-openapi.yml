@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: SavvyCal Meetings Current User API
+  description: 'The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.
+
+    '
+  version: '1.0'
+  contact:
+    name: SavvyCal Developer Support
+    url: https://developers.savvycal.com/
+  termsOfService: https://savvycal.com/legal/terms
+  license:
+    name: Proprietary
+    url: https://savvycal.com/
+servers:
+- url: https://api.savvycal.com/v1
+  description: SavvyCal API v1
+security:
+- BearerAuth: []
+tags:
+- name: Current User
+  description: Retrieve information about the authenticated user.
+paths:
+  /me:
+    get:
+      operationId: getCurrentUser
+      summary: Get current user
+      description: Get the currently authenticated user's profile information.
+      tags:
+      - Current User
+      responses:
+        '200':
+          description: Successful response with user profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    User:
+      type: object
+      description: A SavvyCal user account.
+      properties:
+        id:
+          type: string
+          description: Unique user identifier.
+        email:
+          type: string
+          format: email
+          description: User's email address.
+        first_name:
+          type: string
+          description: User's first name.
+        last_name:
+          type: string
+          description: User's last name.
+        display_name:
+          type: string
+          description: User's full display name.
+        time_zone:
+          type: string
+          description: User's configured time zone identifier.
+          example: America/New_York
+        time_format:
+          type: string
+          description: User's preferred time format.
+          enum:
+          - 12hr
+          - 24hr
+        first_day_of_week:
+          type: integer
+          description: First day of week (0=Sunday, 6=Saturday).
+          minimum: 0
+          maximum: 6
+        plan:
+          type: string
+          description: User's current subscription plan.
+          enum:
+          - free
+          - basic
+          - premium
+        avatar_url:
+          type: string
+          format: uri
+          nullable: true
+          description: URL to the user's avatar image.
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Personal access tokens (prefixed with `pt_secret_`) or OAuth 2.0 access tokens. Include in the Authorization header as: `Authorization: Bearer <token>`
+
+        '
