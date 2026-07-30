@@ -10,7 +10,20 @@ description: >
   JavaScript embed library for embedding scheduling experiences directly into web
   applications.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/savvycal.png
 url: https://raw.githubusercontent.com/api-evangelist/savvycal/refs/heads/main/apis.yml
 created: 2026-06-13
 modified: 2026-06-13
@@ -25,27 +38,90 @@ tags:
   - Webhooks
 
 apis:
-  - name: SavvyCal Meetings API
-    description: >
-      The SavvyCal Meetings REST API enables developers to manage scheduling links,
-      events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0
-      and personal access tokens for authentication and communicates in JSON format.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.savvycal.com/
-    baseURL: https://api.savvycal.com/v1
-    tags:
-      - Scheduling
-      - Meetings
-      - Calendar
-      - Webhooks
-    properties:
-      - type: Documentation
-        url: https://developers.savvycal.com/
-      - type: Authentication
-        url: https://developers.savvycal.com/authentication
-      - type: OpenAPI
-        url: openapi/savvycal-meetings-openapi.yml
-
+- aid: savvycal:savvycal-current-user-api
+  name: SavvyCal Current User API
+  description: Retrieve information about the authenticated user.
+  humanURL: https://developers.savvycal.com/
+  baseURL: https://api.savvycal.com/v1
+  tags:
+  - Current User
+  properties:
+  - type: OpenAPI
+    url: openapi/savvycal-current-user-api-openapi.yml
+  - type: Documentation
+    url: https://developers.savvycal.com/
+  - type: Authentication
+    url: https://developers.savvycal.com/authentication
+- aid: savvycal:savvycal-events-api
+  name: SavvyCal Events API
+  description: Manage scheduled events and bookings.
+  humanURL: https://developers.savvycal.com/
+  baseURL: https://api.savvycal.com/v1
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/savvycal-events-api-openapi.yml
+  - type: Documentation
+    url: https://developers.savvycal.com/
+  - type: Authentication
+    url: https://developers.savvycal.com/authentication
+- aid: savvycal:savvycal-scheduling-links-api
+  name: SavvyCal Scheduling Links API
+  description: Create and manage scheduling links for booking.
+  humanURL: https://developers.savvycal.com/
+  baseURL: https://api.savvycal.com/v1
+  tags:
+  - Scheduling Links
+  properties:
+  - type: OpenAPI
+    url: openapi/savvycal-scheduling-links-api-openapi.yml
+  - type: Documentation
+    url: https://developers.savvycal.com/
+  - type: Authentication
+    url: https://developers.savvycal.com/authentication
+- aid: savvycal:savvycal-time-zones-api
+  name: SavvyCal Time Zones API
+  description: List and retrieve time zone information.
+  humanURL: https://developers.savvycal.com/
+  baseURL: https://api.savvycal.com/v1
+  tags:
+  - Time Zones
+  properties:
+  - type: OpenAPI
+    url: openapi/savvycal-time-zones-api-openapi.yml
+  - type: Documentation
+    url: https://developers.savvycal.com/
+  - type: Authentication
+    url: https://developers.savvycal.com/authentication
+- aid: savvycal:savvycal-webhooks-api
+  name: SavvyCal Webhooks API
+  description: Configure webhooks for real-time event notifications.
+  humanURL: https://developers.savvycal.com/
+  baseURL: https://api.savvycal.com/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/savvycal-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developers.savvycal.com/
+  - type: Authentication
+    url: https://developers.savvycal.com/authentication
+- aid: savvycal:savvycal-workflows-api
+  name: SavvyCal Workflows API
+  description: Manage automation workflows.
+  humanURL: https://developers.savvycal.com/
+  baseURL: https://api.savvycal.com/v1
+  tags:
+  - Workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/savvycal-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://developers.savvycal.com/
+  - type: Authentication
+    url: https://developers.savvycal.com/authentication
 common:
   - type: AgenticAccess
     url: agentic-access/savvycal-agentic-access.yml
