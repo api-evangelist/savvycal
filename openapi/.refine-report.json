@@ -1,0 +1,24 @@
+{
+  "provider": "savvycal",
+  "sources": [
+    "savvycal-current-user-api-openapi.yml",
+    "savvycal-events-api-openapi.yml",
+    "savvycal-scheduling-links-api-openapi.yml",
+    "savvycal-time-zones-api-openapi.yml",
+    "savvycal-webhooks-api-openapi.yml",
+    "savvycal-workflows-api-openapi.yml"
+  ],
+  "outputs": [
+    "savvycal-current-user-api-openapi.yml",
+    "savvycal-events-api-openapi.yml",
+    "savvycal-scheduling-links-api-openapi.yml",
+    "savvycal-time-zones-api-openapi.yml",
+    "savvycal-webhooks-api-openapi.yml",
+    "savvycal-workflows-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
