@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SavvyCal Meetings Current User Time Zones API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time Zones",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List time zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.savvycal.com/v1/time_zones"
+          },
+          "docs": "Get a list of time zones with localized names and DST information."
+        },
+        {
+          "info": {
+            "name": "Get time zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.savvycal.com/v1/time_zones/:segments",
+            "params": [
+              {
+                "name": "segments",
+                "value": "America/New_York",
+                "type": "path",
+                "description": "The time zone identifier path segments (e.g., \"America/New_York\").\n"
+              }
+            ]
+          },
+          "docs": "Get detailed information about a specific time zone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

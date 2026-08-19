@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SavvyCal Meetings Current User Scheduling Links API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scheduling Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List scheduling links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.savvycal.com/v1/links",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Get a paginated list of scheduling links for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get scheduling link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.savvycal.com/v1/links/:link_id",
+            "params": [
+              {
+                "name": "link_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the scheduling link."
+              }
+            ]
+          },
+          "docs": "Get a specific scheduling link by ID."
+        },
+        {
+          "info": {
+            "name": "Update scheduling link",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.savvycal.com/v1/links/:link_id",
+            "params": [
+              {
+                "name": "link_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the scheduling link."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing scheduling link."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
