@@ -35,6 +35,14 @@ tags:
   - Availability
   - Booking
   - Meetings
+  - Webhook
+tags_raw:
+  - Scheduling
+  - Calendar
+  - Appointments
+  - Availability
+  - Booking
+  - Meetings
   - Webhooks
 
 apis:
@@ -58,6 +66,8 @@ apis:
   humanURL: https://developers.savvycal.com/
   baseURL: https://api.savvycal.com/v1
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -86,6 +96,8 @@ apis:
   humanURL: https://developers.savvycal.com/
   baseURL: https://api.savvycal.com/v1
   tags:
+  - Timezones
+  tags_raw:
   - Time Zones
   properties:
   - type: OpenAPI
@@ -100,6 +112,8 @@ apis:
   humanURL: https://developers.savvycal.com/
   baseURL: https://api.savvycal.com/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
