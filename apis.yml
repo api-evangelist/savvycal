@@ -108,7 +108,7 @@ apis:
   humanURL: https://developers.savvycal.com/
   baseURL: https://api.savvycal.com/v1
   tags:
-  - Time Zones
+  - Timezones
   tags_raw:
   - Time Zones
   properties:
