@@ -103,22 +103,6 @@ apis:
     url: https://developers.savvycal.com/
   - type: Authentication
     url: https://developers.savvycal.com/authentication
-- aid: savvycal:savvycal-time-zones-api
-  name: SavvyCal Time Zones API
-  description: List and retrieve time zone information.
-  humanURL: https://developers.savvycal.com/
-  baseURL: https://api.savvycal.com/v1
-  tags:
-  - Timezones
-  tags_raw:
-  - Time Zones
-  properties:
-  - type: OpenAPI
-    url: openapi/savvycal-time-zones-api-openapi.yml
-  - type: Documentation
-    url: https://developers.savvycal.com/
-  - type: Authentication
-    url: https://developers.savvycal.com/authentication
 - aid: savvycal:savvycal-webhooks-api
   name: SavvyCal Webhooks API
   description: Configure webhooks for real-time event notifications.
@@ -145,6 +129,20 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/savvycal-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://developers.savvycal.com/
+  - type: Authentication
+    url: https://developers.savvycal.com/authentication
+- aid: savvycal:savvycal-timezones-api
+  name: SavvyCal Timezones API
+  description: List and retrieve time zone information.
+  humanURL: https://developers.savvycal.com/
+  baseURL: https://api.savvycal.com/v1
+  tags:
+  - Timezones
+  properties:
+  - type: OpenAPI
+    url: openapi/savvycal-timezones-api-openapi.yml
   - type: Documentation
     url: https://developers.savvycal.com/
   - type: Authentication
