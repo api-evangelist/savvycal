@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SavvyCal Meetings Current User Scheduling Links API
-  description: 'The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.
-
-    '
+  title: SavvyCal Meetings Scheduling Links API
+  description: The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.
   version: '1.0'
   contact:
     name: SavvyCal Developer Support
@@ -111,7 +109,51 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 components:
+  responses:
+    Forbidden:
+      description: Insufficient permissions to access the resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: Validation errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Scope:
+      type: object
+      description: A team or organizational scope.
+      properties:
+        id:
+          type: string
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
     UpdateLinkRequest:
       type: object
       description: Request body for updating a scheduling link (all fields optional).
@@ -143,6 +185,16 @@ components:
         increment:
           type: integer
           description: New time slot interval in minutes.
+    LinkList:
+      type: object
+      description: Paginated list of scheduling links.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     Error:
       type: object
       description: Standard error response.
@@ -157,67 +209,6 @@ components:
             type: array
             items:
               type: string
-    PaginationMeta:
-      type: object
-      description: Pagination metadata for list responses.
-      properties:
-        current_page:
-          type: integer
-          description: Current page number.
-        per_page:
-          type: integer
-          description: Number of items per page.
-        total_count:
-          type: integer
-          description: Total number of items.
-        total_pages:
-          type: integer
-          description: Total number of pages.
-    LinkList:
-      type: object
-      description: Paginated list of scheduling links.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    Scope:
-      type: object
-      description: A team or organizational scope.
-      properties:
-        id:
-          type: string
-          description: Unique scope identifier.
-        name:
-          type: string
-          description: Scope name.
-        slug:
-          type: string
-          description: URL slug for the scope.
-    LinkField:
-      type: object
-      description: A custom form field on a scheduling link.
-      properties:
-        id:
-          type: string
-          description: Field identifier.
-        label:
-          type: string
-          description: Field label shown to the booker.
-        type:
-          type: string
-          description: Field input type.
-          enum:
-          - text
-          - textarea
-          - select
-          - checkbox
-          - phone
-        required:
-          type: boolean
-          description: Whether the field is required.
     Link:
       type: object
       description: A SavvyCal scheduling link for booking appointments.
@@ -232,12 +223,14 @@ components:
           type: string
           description: Public-facing name of the scheduling link.
         private_name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Owner-only name for the link.
-          nullable: true
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Optional description shown to bookers.
         state:
           type: string
@@ -264,7 +257,6 @@ components:
             $ref: '#/components/schemas/LinkField'
         scope:
           $ref: '#/components/schemas/Scope'
-          nullable: true
         created_at:
           type: string
           format: date-time
@@ -273,37 +265,44 @@ components:
           type: string
           format: date-time
           description: When the link was last updated.
-  responses:
-    UnprocessableEntity:
-      description: Validation errors.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Insufficient permissions to access the resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    PaginationMeta:
+      type: object
+      description: Pagination metadata for list responses.
+      properties:
+        current_page:
+          type: integer
+          description: Current page number.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        total_count:
+          type: integer
+          description: Total number of items.
+        total_pages:
+          type: integer
+          description: Total number of pages.
+    LinkField:
+      type: object
+      description: A custom form field on a scheduling link.
+      properties:
+        id:
+          type: string
+          description: Field identifier.
+        label:
+          type: string
+          description: Field label shown to the booker.
+        type:
+          type: string
+          description: Field input type.
+          enum:
+          - text
+          - textarea
+          - select
+          - checkbox
+          - phone
+        required:
+          type: boolean
+          description: Whether the field is required.
   parameters:
     LinkId:
       name: link_id

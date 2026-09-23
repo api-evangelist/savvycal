@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SavvyCal Meetings Current User Workflows API
-  description: 'The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.
-
-    '
+  title: SavvyCal Meetings Workflows API
+  description: The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.
   version: '1.0'
   contact:
     name: SavvyCal Developer Support
@@ -25,9 +23,7 @@ paths:
     get:
       operationId: listWorkflows
       summary: List workflows
-      description: 'Get a paginated list of workflows for scopes the authenticated user manages.
-
-        '
+      description: Get a paginated list of workflows for scopes the authenticated user manages.
       tags:
       - Workflows
       parameters:
@@ -82,6 +78,19 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Scope:
+      type: object
+      description: A team or organizational scope.
+      properties:
+        id:
+          type: string
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
     Error:
       type: object
       description: Standard error response.
@@ -96,22 +105,6 @@ components:
             type: array
             items:
               type: string
-    PaginationMeta:
-      type: object
-      description: Pagination metadata for list responses.
-      properties:
-        current_page:
-          type: integer
-          description: Current page number.
-        per_page:
-          type: integer
-          description: Number of items per page.
-        total_count:
-          type: integer
-          description: Total number of items.
-        total_pages:
-          type: integer
-          description: Total number of pages.
     WorkflowList:
       type: object
       description: Paginated list of workflows.
@@ -140,7 +133,6 @@ components:
           - disabled
         scope:
           $ref: '#/components/schemas/Scope'
-          nullable: true
         created_at:
           type: string
           format: date-time
@@ -149,19 +141,22 @@ components:
           type: string
           format: date-time
           description: When the workflow was last updated.
-    Scope:
+    PaginationMeta:
       type: object
-      description: A team or organizational scope.
+      description: Pagination metadata for list responses.
       properties:
-        id:
-          type: string
-          description: Unique scope identifier.
-        name:
-          type: string
-          description: Scope name.
-        slug:
-          type: string
-          description: URL slug for the scope.
+        current_page:
+          type: integer
+          description: Current page number.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        total_count:
+          type: integer
+          description: Total number of items.
+        total_pages:
+          type: integer
+          description: Total number of pages.
   responses:
     Unauthorized:
       description: Authentication credentials missing or invalid.

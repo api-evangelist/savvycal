@@ -1,0 +1,1 @@
+{"resource":"https://savvycal.com/mcp","resource_name":"SavvyCal MCP","scopes_supported":["mcp:read","mcp:write"],"authorization_servers":["https://savvycal.com"],"bearer_methods_supported":["header"]}
