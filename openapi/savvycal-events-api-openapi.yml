@@ -127,19 +127,16 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    Scope:
+    EventList:
       type: object
-      description: A team or organizational scope.
+      description: Paginated list of events.
       properties:
-        id:
-          type: string
-          description: Unique scope identifier.
-        name:
-          type: string
-          description: Scope name.
-        slug:
-          type: string
-          description: URL slug for the scope.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     Event:
       type: object
       description: A scheduled event/booking on SavvyCal.
@@ -227,84 +224,6 @@ components:
           - declined
           - tentative
           - awaiting
-    Payment:
-      type: object
-      description: Payment information associated with an event.
-      properties:
-        amount:
-          type: number
-          description: Payment amount.
-        state:
-          type: string
-          description: Payment state.
-          enum:
-          - awaiting_checkout
-          - paid
-        stripe_dashboard_url:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: Link to the Stripe dashboard record.
-    Conferencing:
-      type: object
-      description: Video conferencing details for an event.
-      properties:
-        join_url:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: URL to join the video call.
-        meeting_id:
-          type:
-          - string
-          - 'null'
-          description: Meeting ID for the video call.
-        integration_type:
-          type: string
-          description: The conferencing integration type (e.g., zoom, google_meet).
-          example: zoom
-    Error:
-      type: object
-      description: Standard error response.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-        errors:
-          type: object
-          description: Field-level validation errors.
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    EventList:
-      type: object
-      description: Paginated list of events.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    PaginationMeta:
-      type: object
-      description: Pagination metadata for list responses.
-      properties:
-        current_page:
-          type: integer
-          description: Current page number.
-        per_page:
-          type: integer
-          description: Number of items per page.
-        total_count:
-          type: integer
-          description: Total number of items.
-        total_pages:
-          type: integer
-          description: Total number of pages.
     CreateEventRequest:
       type: object
       description: Request body for creating a new event via a scheduling link.
@@ -343,6 +262,33 @@ components:
           type: object
           description: Custom form field responses keyed by field ID.
           additionalProperties: true
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    Scope:
+      type: object
+      description: A team or organizational scope.
+      properties:
+        id:
+          type: string
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
     CancelEventRequest:
       type: object
       description: Request body for canceling an event.
@@ -350,13 +296,61 @@ components:
         reason:
           type: string
           description: Optional reason for canceling the event.
+    Conferencing:
+      type: object
+      description: Video conferencing details for an event.
+      properties:
+        join_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL to join the video call.
+        meeting_id:
+          type:
+          - string
+          - 'null'
+          description: Meeting ID for the video call.
+        integration_type:
+          type: string
+          description: The conferencing integration type (e.g., zoom, google_meet).
+          example: zoom
+    Payment:
+      type: object
+      description: Payment information associated with an event.
+      properties:
+        amount:
+          type: number
+          description: Payment amount.
+        state:
+          type: string
+          description: Payment state.
+          enum:
+          - awaiting_checkout
+          - paid
+        stripe_dashboard_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Link to the Stripe dashboard record.
+    PaginationMeta:
+      type: object
+      description: Pagination metadata for list responses.
+      properties:
+        current_page:
+          type: integer
+          description: Current page number.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        total_count:
+          type: integer
+          description: Total number of items.
+        total_pages:
+          type: integer
+          description: Total number of pages.
   responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
       content:
@@ -369,19 +363,25 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    EventId:
-      name: event_id
-      in: path
-      required: true
-      description: The unique identifier of the event.
-      schema:
-        type: string
     LinkId:
       name: link_id
       in: path
       required: true
       description: The unique identifier of the scheduling link.
+      schema:
+        type: string
+    EventId:
+      name: event_id
+      in: path
+      required: true
+      description: The unique identifier of the event.
       schema:
         type: string
   securitySchemes:

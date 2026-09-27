@@ -116,6 +116,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: Validation errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid request parameters.
       content:
@@ -128,32 +140,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: Validation errors.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Scope:
-      type: object
-      description: A team or organizational scope.
-      properties:
-        id:
-          type: string
-          description: Unique scope identifier.
-        name:
-          type: string
-          description: Scope name.
-        slug:
-          type: string
-          description: URL slug for the scope.
     UpdateLinkRequest:
       type: object
       description: Request body for updating a scheduling link (all fields optional).
@@ -185,30 +172,28 @@ components:
         increment:
           type: integer
           description: New time slot interval in minutes.
-    LinkList:
+    LinkField:
       type: object
-      description: Paginated list of scheduling links.
+      description: A custom form field on a scheduling link.
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    Error:
-      type: object
-      description: Standard error response.
-      properties:
-        error:
+        id:
           type: string
-          description: Human-readable error message.
-        errors:
-          type: object
-          description: Field-level validation errors.
-          additionalProperties:
-            type: array
-            items:
-              type: string
+          description: Field identifier.
+        label:
+          type: string
+          description: Field label shown to the booker.
+        type:
+          type: string
+          description: Field input type.
+          enum:
+          - text
+          - textarea
+          - select
+          - checkbox
+          - phone
+        required:
+          type: boolean
+          description: Whether the field is required.
     Link:
       type: object
       description: A SavvyCal scheduling link for booking appointments.
@@ -265,6 +250,43 @@ components:
           type: string
           format: date-time
           description: When the link was last updated.
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    Scope:
+      type: object
+      description: A team or organizational scope.
+      properties:
+        id:
+          type: string
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
+    LinkList:
+      type: object
+      description: Paginated list of scheduling links.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     PaginationMeta:
       type: object
       description: Pagination metadata for list responses.
@@ -281,28 +303,6 @@ components:
         total_pages:
           type: integer
           description: Total number of pages.
-    LinkField:
-      type: object
-      description: A custom form field on a scheduling link.
-      properties:
-        id:
-          type: string
-          description: Field identifier.
-        label:
-          type: string
-          description: Field label shown to the booker.
-        type:
-          type: string
-          description: Field input type.
-          enum:
-          - text
-          - textarea
-          - select
-          - checkbox
-          - phone
-        required:
-          type: boolean
-          description: Whether the field is required.
   parameters:
     LinkId:
       name: link_id

@@ -64,20 +64,15 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    TimeZoneList:
+      type: object
+      description: List of time zones.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeZone'
     Error:
       type: object
       description: Standard error response.
@@ -92,14 +87,6 @@ components:
             type: array
             items:
               type: string
-    TimeZoneList:
-      type: object
-      description: List of time zones.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TimeZone'
     TimeZone:
       type: object
       description: A time zone with localized name and DST information.
@@ -119,6 +106,19 @@ components:
         dst:
           type: boolean
           description: Whether daylight saving time is currently active.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

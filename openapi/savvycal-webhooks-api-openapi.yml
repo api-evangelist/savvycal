@@ -110,47 +110,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    WebhookList:
-      type: object
-      description: Paginated list of webhooks.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Webhook'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    Error:
-      type: object
-      description: Standard error response.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-        errors:
-          type: object
-          description: Field-level validation errors.
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    PaginationMeta:
-      type: object
-      description: Pagination metadata for list responses.
-      properties:
-        current_page:
-          type: integer
-          description: Current page number.
-        per_page:
-          type: integer
-          description: Number of items per page.
-        total_count:
-          type: integer
-          description: Total number of items.
-        total_pages:
-          type: integer
-          description: Total number of pages.
     Webhook:
       type: object
       description: A webhook configuration for receiving SavvyCal event notifications.
@@ -182,6 +161,20 @@ components:
           type: string
           format: date-time
           description: When the webhook was created.
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
     CreateWebhookRequest:
       type: object
       description: Request body for creating a new webhook.
@@ -214,25 +207,32 @@ components:
             - poll.response.created
             - poll.response.updated
             - workflow.action.triggered
-  responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    WebhookList:
+      type: object
+      description: Paginated list of webhooks.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaginationMeta:
+      type: object
+      description: Pagination metadata for list responses.
+      properties:
+        current_page:
+          type: integer
+          description: Current page number.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        total_count:
+          type: integer
+          description: Total number of items.
+        total_pages:
+          type: integer
+          description: Total number of pages.
   parameters:
     WebhookId:
       name: webhook_id

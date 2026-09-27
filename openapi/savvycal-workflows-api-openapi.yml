@@ -77,20 +77,20 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Scope:
-      type: object
-      description: A team or organizational scope.
-      properties:
-        id:
-          type: string
-          description: Unique scope identifier.
-        name:
-          type: string
-          description: Scope name.
-        slug:
-          type: string
-          description: URL slug for the scope.
     Error:
       type: object
       description: Standard error response.
@@ -105,6 +105,19 @@ components:
             type: array
             items:
               type: string
+    Scope:
+      type: object
+      description: A team or organizational scope.
+      properties:
+        id:
+          type: string
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
     WorkflowList:
       type: object
       description: Paginated list of workflows.
@@ -157,19 +170,6 @@ components:
         total_pages:
           type: integer
           description: Total number of pages.
-  responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http
