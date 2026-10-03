@@ -127,16 +127,27 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    EventList:
+    Error:
       type: object
-      description: Paginated list of events.
+      description: Standard error response.
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    CancelEventRequest:
+      type: object
+      description: Request body for canceling an event.
+      properties:
+        reason:
+          type: string
+          description: Optional reason for canceling the event.
     Event:
       type: object
       description: A scheduled event/booking on SavvyCal.
@@ -199,31 +210,51 @@ components:
           type: string
           format: date-time
           description: When the event was last updated.
-    EventAttendee:
+    Payment:
       type: object
-      description: An attendee of a scheduled event.
+      description: Payment information associated with an event.
       properties:
-        id:
+        amount:
+          type: number
+          description: Payment amount.
+        state:
           type: string
-          description: Unique attendee identifier.
-        name:
-          type: string
-          description: Attendee's name.
-        email:
-          type: string
-          format: email
-          description: Attendee's email address.
-        time_zone:
-          type: string
-          description: Attendee's time zone.
-        status:
-          type: string
-          description: Attendee's response status.
+          description: Payment state.
           enum:
-          - accepted
-          - declined
-          - tentative
-          - awaiting
+          - awaiting_checkout
+          - paid
+        stripe_dashboard_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Link to the Stripe dashboard record.
+    EventList:
+      type: object
+      description: Paginated list of events.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaginationMeta:
+      type: object
+      description: Pagination metadata for list responses.
+      properties:
+        current_page:
+          type: integer
+          description: Current page number.
+        per_page:
+          type: integer
+          description: Number of items per page.
+        total_count:
+          type: integer
+          description: Total number of items.
+        total_pages:
+          type: integer
+          description: Total number of pages.
     CreateEventRequest:
       type: object
       description: Request body for creating a new event via a scheduling link.
@@ -262,40 +293,31 @@ components:
           type: object
           description: Custom form field responses keyed by field ID.
           additionalProperties: true
-    Error:
+    EventAttendee:
       type: object
-      description: Standard error response.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-        errors:
-          type: object
-          description: Field-level validation errors.
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    Scope:
-      type: object
-      description: A team or organizational scope.
+      description: An attendee of a scheduled event.
       properties:
         id:
           type: string
-          description: Unique scope identifier.
+          description: Unique attendee identifier.
         name:
           type: string
-          description: Scope name.
-        slug:
+          description: Attendee's name.
+        email:
           type: string
-          description: URL slug for the scope.
-    CancelEventRequest:
-      type: object
-      description: Request body for canceling an event.
-      properties:
-        reason:
+          format: email
+          description: Attendee's email address.
+        time_zone:
           type: string
-          description: Optional reason for canceling the event.
+          description: Attendee's time zone.
+        status:
+          type: string
+          description: Attendee's response status.
+          enum:
+          - accepted
+          - declined
+          - tentative
+          - awaiting
     Conferencing:
       type: object
       description: Video conferencing details for an event.
@@ -315,41 +337,19 @@ components:
           type: string
           description: The conferencing integration type (e.g., zoom, google_meet).
           example: zoom
-    Payment:
+    Scope:
       type: object
-      description: Payment information associated with an event.
+      description: A team or organizational scope.
       properties:
-        amount:
-          type: number
-          description: Payment amount.
-        state:
+        id:
           type: string
-          description: Payment state.
-          enum:
-          - awaiting_checkout
-          - paid
-        stripe_dashboard_url:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: Link to the Stripe dashboard record.
-    PaginationMeta:
-      type: object
-      description: Pagination metadata for list responses.
-      properties:
-        current_page:
-          type: integer
-          description: Current page number.
-        per_page:
-          type: integer
-          description: Number of items per page.
-        total_count:
-          type: integer
-          description: Total number of items.
-        total_pages:
-          type: integer
-          description: Total number of pages.
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
   responses:
     NotFound:
       description: The requested resource was not found.

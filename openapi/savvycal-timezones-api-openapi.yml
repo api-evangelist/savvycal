@@ -65,14 +65,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    TimeZoneList:
-      type: object
-      description: List of time zones.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TimeZone'
     Error:
       type: object
       description: Standard error response.
@@ -87,6 +79,14 @@ components:
             type: array
             items:
               type: string
+    TimeZoneList:
+      type: object
+      description: List of time zones.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeZone'
     TimeZone:
       type: object
       description: A time zone with localized name and DST information.

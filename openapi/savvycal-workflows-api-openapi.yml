@@ -77,19 +77,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -105,29 +92,6 @@ components:
             type: array
             items:
               type: string
-    Scope:
-      type: object
-      description: A team or organizational scope.
-      properties:
-        id:
-          type: string
-          description: Unique scope identifier.
-        name:
-          type: string
-          description: Scope name.
-        slug:
-          type: string
-          description: URL slug for the scope.
-    WorkflowList:
-      type: object
-      description: Paginated list of workflows.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Workflow'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     Workflow:
       type: object
       description: An automation workflow in SavvyCal.
@@ -154,6 +118,16 @@ components:
           type: string
           format: date-time
           description: When the workflow was last updated.
+    WorkflowList:
+      type: object
+      description: Paginated list of workflows.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Workflow'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     PaginationMeta:
       type: object
       description: Pagination metadata for list responses.
@@ -170,6 +144,32 @@ components:
         total_pages:
           type: integer
           description: Total number of pages.
+    Scope:
+      type: object
+      description: A team or organizational scope.
+      properties:
+        id:
+          type: string
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http
