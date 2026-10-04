@@ -110,52 +110,36 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Webhook:
+    WebhookList:
       type: object
-      description: A webhook configuration for receiving SavvyCal event notifications.
+      description: Paginated list of webhooks.
       properties:
-        id:
-          type: string
-          description: Unique webhook identifier.
-        url:
-          type: string
-          format: uri
-          description: The endpoint URL where notifications are sent.
-        secret:
-          type: string
-          description: 'Secret used for authenticating webhook payloads via HMAC-SHA256 signature in the x-savvycal-signature header.
-
-            '
-        state:
-          type: string
-          description: Current webhook state.
-          enum:
-          - active
-          - disabled
-          - deleted
-        version:
-          type: string
-          description: Payload format version.
-          example: '2020-11-18'
-        created_at:
-          type: string
-          format: date-time
-          description: When the webhook was created.
-    Error:
-      type: object
-      description: Standard error response.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-        errors:
-          type: object
-          description: Field-level validation errors.
-          additionalProperties:
-            type: array
-            items:
-              type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     PaginationMeta:
       type: object
       description: Pagination metadata for list responses.
@@ -172,16 +156,6 @@ components:
         total_pages:
           type: integer
           description: Total number of pages.
-    WebhookList:
-      type: object
-      description: Paginated list of webhooks.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Webhook'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     CreateWebhookRequest:
       type: object
       description: Request body for creating a new webhook.
@@ -214,25 +188,51 @@ components:
             - poll.response.created
             - poll.response.updated
             - workflow.action.triggered
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    Webhook:
+      type: object
+      description: A webhook configuration for receiving SavvyCal event notifications.
+      properties:
+        id:
+          type: string
+          description: Unique webhook identifier.
+        url:
+          type: string
+          format: uri
+          description: The endpoint URL where notifications are sent.
+        secret:
+          type: string
+          description: 'Secret used for authenticating webhook payloads via HMAC-SHA256 signature in the x-savvycal-signature header.
+
+            '
+        state:
+          type: string
+          description: Current webhook state.
+          enum:
+          - active
+          - disabled
+          - deleted
+        version:
+          type: string
+          description: Payload format version.
+          example: '2020-11-18'
+        created_at:
+          type: string
+          format: date-time
+          description: When the webhook was created.
   parameters:
     WebhookId:
       name: webhook_id

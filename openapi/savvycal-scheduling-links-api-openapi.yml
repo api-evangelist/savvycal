@@ -109,65 +109,38 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: Validation errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Insufficient permissions to access the resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      description: Standard error response.
-      properties:
-        error:
-          type: string
-          description: Human-readable error message.
-        errors:
-          type: object
-          description: Field-level validation errors.
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    Scope:
-      type: object
-      description: A team or organizational scope.
-      properties:
-        id:
-          type: string
-          description: Unique scope identifier.
-        name:
-          type: string
-          description: Scope name.
-        slug:
-          type: string
-          description: URL slug for the scope.
-    UpdateLinkRequest:
-      type: object
-      description: Request body for updating a scheduling link (all fields optional).
-      properties:
-        name:
-          type: string
-          description: New public-facing name.
-        private_name:
-          type: string
-          description: New owner-only name.
-        description:
-          type: string
-          description: New description.
-        state:
-          type: string
-          enum:
-          - active
-          - pending
-          - disabled
-          description: New state for the link.
-        default_duration:
-          type: integer
-          description: New default duration in minutes.
-        durations:
-          type: array
-          items:
-            type: integer
-          description: New set of available durations in minutes.
-        increment:
-          type: integer
-          description: New time slot interval in minutes.
     Link:
       type: object
       description: A SavvyCal scheduling link for booking appointments.
@@ -224,6 +197,19 @@ components:
           type: string
           format: date-time
           description: When the link was last updated.
+    Scope:
+      type: object
+      description: A team or organizational scope.
+      properties:
+        id:
+          type: string
+          description: Unique scope identifier.
+        name:
+          type: string
+          description: Scope name.
+        slug:
+          type: string
+          description: URL slug for the scope.
     PaginationMeta:
       type: object
       description: Pagination metadata for list responses.
@@ -262,6 +248,37 @@ components:
         required:
           type: boolean
           description: Whether the field is required.
+    UpdateLinkRequest:
+      type: object
+      description: Request body for updating a scheduling link (all fields optional).
+      properties:
+        name:
+          type: string
+          description: New public-facing name.
+        private_name:
+          type: string
+          description: New owner-only name.
+        description:
+          type: string
+          description: New description.
+        state:
+          type: string
+          enum:
+          - active
+          - pending
+          - disabled
+          description: New state for the link.
+        default_duration:
+          type: integer
+          description: New default duration in minutes.
+        durations:
+          type: array
+          items:
+            type: integer
+          description: New set of available durations in minutes.
+        increment:
+          type: integer
+          description: New time slot interval in minutes.
     LinkList:
       type: object
       description: Paginated list of scheduling links.
@@ -272,37 +289,20 @@ components:
             $ref: '#/components/schemas/Link'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Insufficient permissions to access the resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: Validation errors.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+        errors:
+          type: object
+          description: Field-level validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
   parameters:
     LinkId:
       name: link_id

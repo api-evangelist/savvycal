@@ -64,7 +64,39 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    TimeZone:
+      type: object
+      description: A time zone with localized name and DST information.
+      properties:
+        identifier:
+          type: string
+          description: IANA time zone identifier.
+          example: America/New_York
+        name:
+          type: string
+          description: Localized display name for the time zone.
+          example: Eastern Time (US & Canada)
+        utc_offset:
+          type: string
+          description: Current UTC offset (e.g., "-05:00").
+          example: -05:00
+        dst:
+          type: boolean
+          description: Whether daylight saving time is currently active.
     Error:
       type: object
       description: Standard error response.
@@ -87,38 +119,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TimeZone'
-    TimeZone:
-      type: object
-      description: A time zone with localized name and DST information.
-      properties:
-        identifier:
-          type: string
-          description: IANA time zone identifier.
-          example: America/New_York
-        name:
-          type: string
-          description: Localized display name for the time zone.
-          example: Eastern Time (US & Canada)
-        utc_offset:
-          type: string
-          description: Current UTC offset (e.g., "-05:00").
-          example: -05:00
-        dst:
-          type: boolean
-          description: Whether daylight saving time is currently active.
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http
