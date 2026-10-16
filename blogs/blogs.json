@@ -3,7 +3,7 @@
   "feed_type": "atom",
   "blog_url": "https://savvycal.com/blog",
   "last_fetched": "2026-06-13",
-  "post_count": 65,
+  "post_count": 68,
   "posts": [
     {
       "date": "2023-03-29",
@@ -173,6 +173,17 @@
   "repo": "savvycal",
   "feeds": [
     {
+      "source": "https://savvycal.com/blog",
+      "error": "HTTPError"
+    },
+    {
+      "source": "https://savvycal.com/feed.xml",
+      "feed_url": "https://savvycal.com/feed.xml",
+      "title": "",
+      "saved": 3,
+      "method": "feed"
+    },
+    {
       "source": "https://www.linkedin.com/company/savvycal",
       "feed_url": "https://www.linkedin.com/company/savvycal",
       "title": "",
@@ -180,6 +191,6 @@
       "method": "none"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "agent_pulled": "2026-07-04"
 }
