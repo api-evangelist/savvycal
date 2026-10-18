@@ -139,6 +139,8 @@ apis:
   humanURL: https://developers.savvycal.com/
   baseURL: https://api.savvycal.com/v1
   tags:
+  - Timezone
+  tags_raw:
   - Timezones
   properties:
   - type: OpenAPI
