@@ -150,6 +150,8 @@ apis:
   - type: Authentication
     url: https://developers.savvycal.com/authentication
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/savvycal/overview
   - type: CapabilityMap
     url: capabilities/savvycal-capability-edges.yml
     name: SavvyCal Business Capability Map

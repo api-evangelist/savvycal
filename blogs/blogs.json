@@ -3,7 +3,7 @@
   "feed_type": "atom",
   "blog_url": "https://savvycal.com/blog",
   "last_fetched": "2026-06-13",
-  "post_count": 68,
+  "post_count": 115,
   "posts": [
     {
       "date": "2023-03-29",
@@ -180,7 +180,7 @@
       "source": "https://savvycal.com/feed.xml",
       "feed_url": "https://savvycal.com/feed.xml",
       "title": "",
-      "saved": 3,
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -191,6 +191,6 @@
       "method": "none"
     }
   ],
-  "fetched": "2026-10-10T13:15:00Z",
+  "fetched": "2026-10-17T14:53:57Z",
   "agent_pulled": "2026-07-04"
 }
