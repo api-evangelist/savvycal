@@ -1,948 +1,949 @@
 {
+  "info": {
+    "_postman_id": "bcdd05b3-1166-4e81-a52a-9fb7962eabb2",
+    "name": "SavvyCal Meetings Scheduling Links API",
+    "description": "The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.\n\nContact Support:\n Name: SavvyCal Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:00:39.000Z",
+    "updatedAt": "2026-10-21T21:00:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bcdd05b3-1166-4e81-a52a-9fb7962eabb2"
+  },
   "item": [
     {
-      "id": "0ec9d412-5a90-4c1a-89a4-0ad15b355adb",
-      "name": "Scheduling Links",
-      "description": {
-        "content": "Create and manage scheduling links for booking.",
-        "type": "text/plain"
-      },
+      "name": "links",
       "item": [
         {
-          "id": "bb365b67-fb9a-48c9-9c1d-d517ad7184dc",
-          "name": "List scheduling links",
-          "request": {
-            "name": "List scheduling links",
-            "description": {
-              "content": "Get a paginated list of scheduling links for the authenticated user.",
-              "type": "text/plain"
+          "name": "{link_id}",
+          "item": [
+            {
+              "name": "Get scheduling link",
+              "id": "03088768-5d98-4c1a-9db2-b215f3dc2914",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/links/:link_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links",
+                    ":link_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "5aa83036-17b2-458c-80d0-5d3a627a7883",
+                      "key": "link_id",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the scheduling link."
+                    }
+                  ]
+                },
+                "description": "Get a specific scheduling link by ID."
+              },
+              "response": [
+                {
+                  "id": "9db6b170-72b9-49ab-9dbf-e7bc4905ef13",
+                  "name": "Scheduling link details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:link_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":link_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "link_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"name\": \"<string>\",\n  \"private_name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"state\": \"active\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\",\n  \"fields\": [\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"type\": \"checkbox\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"type\": \"checkbox\",\n      \"required\": \"<boolean>\"\n    }\n  ],\n  \"scope\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\"\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-21T21:00:39.000Z",
+                  "updatedAt": "2026-10-21T21:00:39.000Z",
+                  "uid": "35240-9db6b170-72b9-49ab-9dbf-e7bc4905ef13"
+                },
+                {
+                  "id": "bde86a9d-e883-436c-ad50-9605d60dde9e",
+                  "name": "Authentication credentials missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:link_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":link_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "link_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"culpacb\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cillum_7\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:00:39.000Z",
+                  "updatedAt": "2026-10-21T21:00:39.000Z",
+                  "uid": "35240-bde86a9d-e883-436c-ad50-9605d60dde9e"
+                },
+                {
+                  "id": "99bb299a-ce44-4710-a3db-bf66f3766b20",
+                  "name": "Insufficient permissions to access the resource.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:link_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":link_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "link_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"culpacb\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cillum_7\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:00:39.000Z",
+                  "updatedAt": "2026-10-21T21:00:39.000Z",
+                  "uid": "35240-99bb299a-ce44-4710-a3db-bf66f3766b20"
+                },
+                {
+                  "id": "f28c39cb-2349-4085-abed-6eb3eb9ede5c",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:link_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":link_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "link_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"culpacb\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cillum_7\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:00:39.000Z",
+                  "updatedAt": "2026-10-21T21:00:39.000Z",
+                  "uid": "35240-f28c39cb-2349-4085-abed-6eb3eb9ede5c"
+                }
+              ],
+              "createdAt": "2026-10-21T21:00:39.000Z",
+              "updatedAt": "2026-10-21T21:00:39.000Z",
+              "uid": "35240-03088768-5d98-4c1a-9db2-b215f3dc2914"
             },
+            {
+              "name": "Update scheduling link",
+              "id": "753302ac-5d53-4cb5-aa35-2d3c81ce0f12",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"pending\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/links/:link_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links",
+                    ":link_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7c3187a4-7398-42c4-8667-af6c2af84c7c",
+                      "key": "link_id",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the scheduling link."
+                    }
+                  ]
+                },
+                "description": "Update an existing scheduling link."
+              },
+              "response": [
+                {
+                  "id": "3caf72c3-ff48-48c7-9d30-19407c241a92",
+                  "name": "Updated scheduling link.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"pending\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:link_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":link_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "link_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"name\": \"<string>\",\n  \"private_name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"state\": \"active\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\",\n  \"fields\": [\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"type\": \"checkbox\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"type\": \"checkbox\",\n      \"required\": \"<boolean>\"\n    }\n  ],\n  \"scope\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\"\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-21T21:00:39.000Z",
+                  "updatedAt": "2026-10-21T21:00:39.000Z",
+                  "uid": "35240-3caf72c3-ff48-48c7-9d30-19407c241a92"
+                },
+                {
+                  "id": "529cfcdc-8856-4673-b293-516dbc65d233",
+                  "name": "Invalid request parameters.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"pending\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:link_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":link_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "link_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"culpacb\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cillum_7\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:00:39.000Z",
+                  "updatedAt": "2026-10-21T21:00:39.000Z",
+                  "uid": "35240-529cfcdc-8856-4673-b293-516dbc65d233"
+                },
+                {
+                  "id": "f53335e1-7091-4ef1-bf7c-8d4836e697cc",
+                  "name": "Authentication credentials missing or invalid.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"pending\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:link_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":link_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "link_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"culpacb\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cillum_7\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:00:39.000Z",
+                  "updatedAt": "2026-10-21T21:00:39.000Z",
+                  "uid": "35240-f53335e1-7091-4ef1-bf7c-8d4836e697cc"
+                },
+                {
+                  "id": "fca0b3d6-a762-42ff-9687-08046d84c494",
+                  "name": "Insufficient permissions to access the resource.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"pending\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:link_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":link_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "link_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"culpacb\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cillum_7\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:00:39.000Z",
+                  "updatedAt": "2026-10-21T21:00:39.000Z",
+                  "uid": "35240-fca0b3d6-a762-42ff-9687-08046d84c494"
+                },
+                {
+                  "id": "695012d5-feee-4312-be7b-9e4107b7edba",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"pending\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:link_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":link_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "link_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"culpacb\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cillum_7\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:00:39.000Z",
+                  "updatedAt": "2026-10-21T21:00:39.000Z",
+                  "uid": "35240-695012d5-feee-4312-be7b-9e4107b7edba"
+                },
+                {
+                  "id": "18c17356-880e-462a-aeb9-854bf12199ce",
+                  "name": "Validation errors.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"pending\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:link_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":link_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "link_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"culpacb\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cillum_7\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:00:39.000Z",
+                  "updatedAt": "2026-10-21T21:00:39.000Z",
+                  "uid": "35240-18c17356-880e-462a-aeb9-854bf12199ce"
+                }
+              ],
+              "createdAt": "2026-10-21T21:00:39.000Z",
+              "updatedAt": "2026-10-21T21:00:39.000Z",
+              "uid": "35240-753302ac-5d53-4cb5-aa35-2d3c81ce0f12"
+            }
+          ],
+          "id": "76ae85b0-0c35-4d67-9f67-abc4815fd7fd",
+          "createdAt": "2026-10-21T21:00:39.000Z",
+          "updatedAt": "2026-10-21T21:00:39.000Z",
+          "uid": "35240-76ae85b0-0c35-4d67-9f67-abc4815fd7fd"
+        },
+        {
+          "name": "List scheduling links",
+          "id": "dade7052-f0f4-4a36-8180-7f0251f17231",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/links?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "links"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Page number for pagination.",
                   "key": "page",
-                  "value": "1",
-                  "description": "Page number for pagination."
+                  "value": "1"
                 },
                 {
-                  "disabled": false,
+                  "description": "Number of results per page.",
                   "key": "per_page",
-                  "value": "20",
-                  "description": "Number of results per page."
+                  "value": "20"
                 }
-              ],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Get a paginated list of scheduling links for the authenticated user."
           },
           "response": [
             {
-              "id": "77adc8fb-f6ec-4f29-975e-6c6c5dfa807d",
+              "id": "c1698eea-00f8-4da5-9189-cdacb060a1e7",
               "name": "Paginated list of scheduling links.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "links"
-                  ],
+                  "raw": "{{baseUrl}}/links?page=1&per_page=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "links"
+                  ],
                   "query": [
                     {
+                      "description": "Page number for pagination.",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of results per page.",
                       "key": "per_page",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"private_name\": \"string\",\n      \"description\": \"string\",\n      \"state\": \"disabled\",\n      \"default_duration\": 7857,\n      \"durations\": [\n        8064,\n        2055\n      ],\n      \"increment\": 885,\n      \"fields\": [\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"type\": \"checkbox\",\n          \"required\": true\n        },\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"type\": \"text\",\n          \"required\": false\n        }\n      ],\n      \"scope\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"slug\": \"string\"\n      },\n      \"created_at\": \"1999-11-06T11:09:26.697Z\",\n      \"updated_at\": \"1990-08-01T21:45:48.941Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"private_name\": \"string\",\n      \"description\": \"string\",\n      \"state\": \"disabled\",\n      \"default_duration\": 8473,\n      \"durations\": [\n        781,\n        7729\n      ],\n      \"increment\": 727,\n      \"fields\": [\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"type\": \"phone\",\n          \"required\": true\n        },\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"type\": \"text\",\n          \"required\": false\n        }\n      ],\n      \"scope\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"slug\": \"string\"\n      },\n      \"created_at\": \"1982-10-11T03:36:13.811Z\",\n      \"updated_at\": \"2009-05-23T15:33:59.349Z\"\n    }\n  ],\n  \"meta\": {\n    \"current_page\": 4458,\n    \"per_page\": 5440,\n    \"total_count\": 6054,\n    \"total_pages\": 7033\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"name\": \"<string>\",\n      \"private_name\": \"<string,null>\",\n      \"description\": \"<string,null>\",\n      \"state\": \"active\",\n      \"default_duration\": \"<integer>\",\n      \"durations\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"increment\": \"<integer>\",\n      \"fields\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"type\": \"select\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"type\": \"select\",\n          \"required\": \"<boolean>\"\n        }\n      ],\n      \"scope\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\"\n      },\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"name\": \"<string>\",\n      \"private_name\": \"<string,null>\",\n      \"description\": \"<string,null>\",\n      \"state\": \"disabled\",\n      \"default_duration\": \"<integer>\",\n      \"durations\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"increment\": \"<integer>\",\n      \"fields\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"type\": \"text\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"type\": \"checkbox\",\n          \"required\": \"<boolean>\"\n        }\n      ],\n      \"scope\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\"\n      },\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"meta\": {\n    \"current_page\": \"<integer>\",\n    \"per_page\": \"<integer>\",\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+              "createdAt": "2026-10-21T21:00:39.000Z",
+              "updatedAt": "2026-10-21T21:00:39.000Z",
+              "uid": "35240-c1698eea-00f8-4da5-9189-cdacb060a1e7"
             },
             {
-              "id": "129621c4-d568-4a42-b544-28eb75d7d34a",
+              "id": "4e759da1-43f1-4e13-93de-d37d2ec5f7c0",
               "name": "Invalid request parameters.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "links"
-                  ],
+                  "raw": "{{baseUrl}}/links?page=1&per_page=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "links"
+                  ],
                   "query": [
                     {
+                      "description": "Page number for pagination.",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of results per page.",
                       "key": "per_page",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a730df52-4b9b-4303-ab6d-dc4cbc967b8d",
-              "name": "Authentication credentials missing or invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "per_page",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "62455bcf-a158-4530-b81f-ecb96ab18210",
-              "name": "Insufficient permissions to access the resource.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "per_page",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "69704bc7-6921-470f-840f-4a6c4c4eb744",
-          "name": "Get scheduling link",
-          "request": {
-            "name": "Get scheduling link",
-            "description": {
-              "content": "Get a specific scheduling link by ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "links",
-                ":link_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "link_id",
-                  "description": "(Required) The unique identifier of the scheduling link."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "f0b0480a-4c2f-4a1e-8b44-b11a82ccb755",
-              "name": "Scheduling link details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"slug\": \"string\",\n  \"name\": \"string\",\n  \"private_name\": \"string\",\n  \"description\": \"string\",\n  \"state\": \"pending\",\n  \"default_duration\": 2512,\n  \"durations\": [\n    2909,\n    2287\n  ],\n  \"increment\": 2794,\n  \"fields\": [\n    {\n      \"id\": \"string\",\n      \"label\": \"string\",\n      \"type\": \"checkbox\",\n      \"required\": true\n    },\n    {\n      \"id\": \"string\",\n      \"label\": \"string\",\n      \"type\": \"text\",\n      \"required\": false\n    }\n  ],\n  \"scope\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"slug\": \"string\"\n  },\n  \"created_at\": \"1982-10-17T15:25:42.934Z\",\n  \"updated_at\": \"1984-05-05T11:11:26.159Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cb0db132-ca85-4444-ba45-1fc0ab9b44ce",
-              "name": "Authentication credentials missing or invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8d7ec4e7-22e6-447c-adf9-55093e60cb67",
-              "name": "Insufficient permissions to access the resource.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5d0fd3c3-17d8-4c5b-ba96-70fced90d74c",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e417c4e1-f8f3-43c2-a4ec-c35c7d3aa220",
-          "name": "Update scheduling link",
-          "request": {
-            "name": "Update scheduling link",
-            "description": {
-              "content": "Update an existing scheduling link.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "links",
-                ":link_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "link_id",
-                  "description": "(Required) The unique identifier of the scheduling link."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"<string>\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "34234900-e902-4da2-9c88-c5480aa155af",
-              "name": "Updated scheduling link.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"<string>\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"slug\": \"string\",\n  \"name\": \"string\",\n  \"private_name\": \"string\",\n  \"description\": \"string\",\n  \"state\": \"pending\",\n  \"default_duration\": 2512,\n  \"durations\": [\n    2909,\n    2287\n  ],\n  \"increment\": 2794,\n  \"fields\": [\n    {\n      \"id\": \"string\",\n      \"label\": \"string\",\n      \"type\": \"checkbox\",\n      \"required\": true\n    },\n    {\n      \"id\": \"string\",\n      \"label\": \"string\",\n      \"type\": \"text\",\n      \"required\": false\n    }\n  ],\n  \"scope\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"slug\": \"string\"\n  },\n  \"created_at\": \"1982-10-17T15:25:42.934Z\",\n  \"updated_at\": \"1984-05-05T11:11:26.159Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0cff6fa2-6a71-46f6-b9bd-76e541da6511",
-              "name": "Invalid request parameters.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"<string>\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"culpacb\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cillum_7\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T21:00:39.000Z",
+              "updatedAt": "2026-10-21T21:00:39.000Z",
+              "uid": "35240-4e759da1-43f1-4e13-93de-d37d2ec5f7c0"
             },
             {
-              "id": "642bdbf0-fe4e-4ba3-a773-e588e20e0bc5",
+              "id": "157016e3-8697-4098-a990-315d9a830569",
               "name": "Authentication credentials missing or invalid.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"<string>\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
+                "url": {
+                  "raw": "{{baseUrl}}/links?page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of results per page.",
+                      "key": "per_page",
+                      "value": "20"
                     }
-                  }
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"culpacb\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cillum_7\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T21:00:39.000Z",
+              "updatedAt": "2026-10-21T21:00:39.000Z",
+              "uid": "35240-157016e3-8697-4098-a990-315d9a830569"
             },
             {
-              "id": "3e6295c8-8804-41c3-826b-a32269363ae8",
+              "id": "ed1b481c-3687-4cb3-a088-a6d149c49a4c",
               "name": "Insufficient permissions to access the resource.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"<string>\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
+                "url": {
+                  "raw": "{{baseUrl}}/links?page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of results per page.",
+                      "key": "per_page",
+                      "value": "20"
                     }
-                  }
+                  ]
                 }
               },
               "status": "Forbidden",
               "code": 403,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1ef00d83-833b-4afe-94f5-0c6e4789c927",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"<string>\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b6fcfe09-2ecc-4027-ba1d-a259ab84baf4",
-              "name": "Validation errors.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"private_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"state\": \"<string>\",\n  \"default_duration\": \"<integer>\",\n  \"durations\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"increment\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"culpacb\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cillum_7\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T21:00:39.000Z",
+              "updatedAt": "2026-10-21T21:00:39.000Z",
+              "uid": "35240-ed1b481c-3687-4cb3-a088-a6d149c49a4c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:00:39.000Z",
+          "updatedAt": "2026-10-21T21:00:39.000Z",
+          "uid": "35240-dade7052-f0f4-4a36-8180-7f0251f17231"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.savvycal.com/v1",
-      "key": "baseUrl"
+      "id": "cfb79d8f-442d-44a7-b9c5-af23b14ad947",
+      "createdAt": "2026-10-21T21:00:39.000Z",
+      "updatedAt": "2026-10-21T21:00:39.000Z",
+      "uid": "35240-cfb79d8f-442d-44a7-b9c5-af23b14ad947"
     }
   ],
   "auth": {
@@ -950,17 +951,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "df7204b6-69e6-4f8b-849c-71e4b95bec92",
-    "name": "SavvyCal Meetings Current User Scheduling Links API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.\n\n\nContact Support:\n Name: SavvyCal Developer Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.savvycal.com/v1"
     }
-  }
+  ]
 }

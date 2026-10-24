@@ -1,918 +1,954 @@
 {
+  "info": {
+    "_postman_id": "f70c114a-db44-4627-b83d-8ac80d3f6eee",
+    "name": "SavvyCal Meetings Events API",
+    "description": "The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.\n\nContact Support:\n Name: SavvyCal Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:00:33.000Z",
+    "updatedAt": "2026-10-21T21:00:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f70c114a-db44-4627-b83d-8ac80d3f6eee"
+  },
   "item": [
     {
-      "id": "6fd44497-7a9b-4c48-83fb-311c6e2cd000",
-      "name": "Events",
-      "description": {
-        "content": "Manage scheduled events and bookings.",
-        "type": "text/plain"
-      },
+      "name": "events",
       "item": [
         {
-          "id": "99dc8eb7-16df-497f-8b3b-0c678bb97e8e",
-          "name": "List events",
-          "request": {
-            "name": "List events",
-            "description": {
-              "content": "List your events scheduled via SavvyCal.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "events"
+          "name": "{event_id}",
+          "item": [
+            {
+              "name": "cancel",
+              "item": [
+                {
+                  "name": "Cancel event",
+                  "id": "76ae173d-cb77-459f-b634-3d80bf731beb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"reason\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:event_id/cancel",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":event_id",
+                        "cancel"
+                      ],
+                      "variable": [
+                        {
+                          "id": "dcf872e4-56c2-4f6d-b90a-ec70d4d3f884",
+                          "key": "event_id",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the event."
+                        }
+                      ]
+                    },
+                    "description": "Cancel an event by its ID."
+                  },
+                  "response": [
+                    {
+                      "id": "09d9383d-9353-47e4-81e0-a339321f74c8",
+                      "name": "Event successfully canceled.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reason\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/:event_id/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            ":event_id",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "key": "event_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"awaiting_approval\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"buffer_before\": \"<integer,null>\",\n  \"buffer_after\": \"<integer,null>\",\n  \"original_start_time\": \"<string,null-date-time>\",\n  \"attendees\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"time_zone\": \"<string>\",\n      \"status\": \"declined\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"time_zone\": \"<string>\",\n      \"status\": \"accepted\"\n    }\n  ],\n  \"conferencing\": {\n    \"join_url\": \"<string,null-uri>\",\n    \"meeting_id\": \"<string,null>\",\n    \"integration_type\": \"<string>\"\n  },\n  \"payment\": {\n    \"amount\": \"<number>\",\n    \"state\": \"paid\",\n    \"stripe_dashboard_url\": \"<string,null-uri>\"\n  },\n  \"scope\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\"\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-21T21:00:33.000Z",
+                      "updatedAt": "2026-10-21T21:00:33.000Z",
+                      "uid": "35240-09d9383d-9353-47e4-81e0-a339321f74c8"
+                    },
+                    {
+                      "id": "01b52039-dfad-42c6-94d8-b5b666d41e5f",
+                      "name": "Authentication credentials missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reason\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/:event_id/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            ":event_id",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "key": "event_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"sed_8\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"eu_8\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-10-21T21:00:33.000Z",
+                      "updatedAt": "2026-10-21T21:00:33.000Z",
+                      "uid": "35240-01b52039-dfad-42c6-94d8-b5b666d41e5f"
+                    },
+                    {
+                      "id": "53cfe6c7-bf97-4cc7-9f41-22ff906a63d0",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reason\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/:event_id/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            ":event_id",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "key": "event_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"sed_8\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"eu_8\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-10-21T21:00:33.000Z",
+                      "updatedAt": "2026-10-21T21:00:33.000Z",
+                      "uid": "35240-53cfe6c7-bf97-4cc7-9f41-22ff906a63d0"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T21:00:33.000Z",
+                  "updatedAt": "2026-10-21T21:00:33.000Z",
+                  "uid": "35240-76ae173d-cb77-459f-b634-3d80bf731beb"
+                }
               ],
+              "id": "cb8b1980-3d24-4409-872e-4311fb622dc1",
+              "createdAt": "2026-10-21T21:00:33.000Z",
+              "updatedAt": "2026-10-21T21:00:33.000Z",
+              "uid": "35240-cb8b1980-3d24-4409-872e-4311fb622dc1"
+            },
+            {
+              "name": "Get event",
+              "id": "507eea7e-ee89-4e90-9e85-818ec1356c05",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events/:event_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events",
+                    ":event_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f59cd9dc-7a60-4e88-97c0-084872b91af3",
+                      "key": "event_id",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the event."
+                    }
+                  ]
+                },
+                "description": "Fetch a single event by its ID."
+              },
+              "response": [
+                {
+                  "id": "3ea03cef-0a99-4000-b858-9c06dd0ed652",
+                  "name": "Event details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:event_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":event_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "event_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"awaiting_approval\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"buffer_before\": \"<integer,null>\",\n  \"buffer_after\": \"<integer,null>\",\n  \"original_start_time\": \"<string,null-date-time>\",\n  \"attendees\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"time_zone\": \"<string>\",\n      \"status\": \"declined\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"time_zone\": \"<string>\",\n      \"status\": \"accepted\"\n    }\n  ],\n  \"conferencing\": {\n    \"join_url\": \"<string,null-uri>\",\n    \"meeting_id\": \"<string,null>\",\n    \"integration_type\": \"<string>\"\n  },\n  \"payment\": {\n    \"amount\": \"<number>\",\n    \"state\": \"paid\",\n    \"stripe_dashboard_url\": \"<string,null-uri>\"\n  },\n  \"scope\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\"\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-21T21:00:33.000Z",
+                  "updatedAt": "2026-10-21T21:00:33.000Z",
+                  "uid": "35240-3ea03cef-0a99-4000-b858-9c06dd0ed652"
+                },
+                {
+                  "id": "044b6f27-da1b-4954-aae0-56dcd8593620",
+                  "name": "Authentication credentials missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:event_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":event_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "event_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"sed_8\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"eu_8\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:00:33.000Z",
+                  "updatedAt": "2026-10-21T21:00:33.000Z",
+                  "uid": "35240-044b6f27-da1b-4954-aae0-56dcd8593620"
+                },
+                {
+                  "id": "ba2df8b1-ef7a-4051-a64d-a5be070cea5b",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:event_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":event_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "event_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"sed_8\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"eu_8\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:00:33.000Z",
+                  "updatedAt": "2026-10-21T21:00:33.000Z",
+                  "uid": "35240-ba2df8b1-ef7a-4051-a64d-a5be070cea5b"
+                }
+              ],
+              "createdAt": "2026-10-21T21:00:33.000Z",
+              "updatedAt": "2026-10-21T21:00:33.000Z",
+              "uid": "35240-507eea7e-ee89-4e90-9e85-818ec1356c05"
+            }
+          ],
+          "id": "fa90d2bd-4d89-45ea-b790-e3e6bac48bda",
+          "createdAt": "2026-10-21T21:00:33.000Z",
+          "updatedAt": "2026-10-21T21:00:33.000Z",
+          "uid": "35240-fa90d2bd-4d89-45ea-b790-e3e6bac48bda"
+        },
+        {
+          "name": "List events",
+          "id": "e0c655c4-1c3c-4266-b08e-babf99cbe861",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/events?page=1&per_page=20",
               "host": [
                 "{{baseUrl}}"
+              ],
+              "path": [
+                "events"
               ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Page number for pagination.",
                   "key": "page",
-                  "value": "1",
-                  "description": "Page number for pagination."
+                  "value": "1"
                 },
                 {
-                  "disabled": false,
+                  "description": "Number of results per page.",
                   "key": "per_page",
-                  "value": "20",
-                  "description": "Number of results per page."
+                  "value": "20"
                 }
-              ],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "List your events scheduled via SavvyCal."
           },
           "response": [
             {
-              "id": "30c436bb-bf77-47f1-bdb1-c3333c6dae42",
+              "id": "f3bd503a-56c1-4723-9f6c-95bcb37cb153",
               "name": "Paginated list of events.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "events"
-                  ],
+                  "raw": "{{baseUrl}}/events?page=1&per_page=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "events"
+                  ],
                   "query": [
                     {
+                      "description": "Page number for pagination.",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of results per page.",
                       "key": "per_page",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"canceled\",\n      \"start_time\": \"1963-07-14T20:25:34.800Z\",\n      \"end_time\": \"2024-09-10T22:12:08.357Z\",\n      \"duration\": 8501,\n      \"buffer_before\": 3238,\n      \"buffer_after\": 6006,\n      \"original_start_time\": \"1980-03-05T22:03:48.138Z\",\n      \"attendees\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"email\": \"ACAD@OnwHcLqlp.efuq\",\n          \"time_zone\": \"string\",\n          \"status\": \"tentative\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"email\": \"YLJmT@BJYVyYBedIRSFDRLfRNqvRz.ohi\",\n          \"time_zone\": \"string\",\n          \"status\": \"declined\"\n        }\n      ],\n      \"conferencing\": {\n        \"join_url\": \"https://Wy.qkTMjZQ\",\n        \"meeting_id\": \"string\",\n        \"integration_type\": \"zoom\"\n      },\n      \"payment\": {\n        \"amount\": 6722.667898112802,\n        \"state\": \"awaiting_checkout\",\n        \"stripe_dashboard_url\": \"http://vJABFJEMGMMOlzlLgDfCdtuseRGCbZY.bjbsxPcwJ,o.kPL.L7EbA,noKWicO\"\n      },\n      \"scope\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"slug\": \"string\"\n      },\n      \"created_at\": \"1985-03-11T07:53:53.075Z\",\n      \"updated_at\": \"1981-07-25T16:57:12.885Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"confirmed\",\n      \"start_time\": \"1970-10-28T14:04:03.065Z\",\n      \"end_time\": \"1952-10-10T06:57:18.743Z\",\n      \"duration\": 3085,\n      \"buffer_before\": 3412,\n      \"buffer_after\": 6640,\n      \"original_start_time\": \"1950-10-31T09:32:11.320Z\",\n      \"attendees\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"email\": \"urM@BMOfncUte.nz\",\n          \"time_zone\": \"string\",\n          \"status\": \"tentative\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"email\": \"Qc78miykBJ6@yCuFrpILVqbYuCmrmfHWBeQ.xbil\",\n          \"time_zone\": \"string\",\n          \"status\": \"accepted\"\n        }\n      ],\n      \"conferencing\": {\n        \"join_url\": \"http://JK.ibBXPHjW1\",\n        \"meeting_id\": \"string\",\n        \"integration_type\": \"zoom\"\n      },\n      \"payment\": {\n        \"amount\": 6612.322015974397,\n        \"state\": \"paid\",\n        \"stripe_dashboard_url\": \"https://viAqIPUrBwoxDTfeAtbSrgX.iurne6\"\n      },\n      \"scope\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"slug\": \"string\"\n      },\n      \"created_at\": \"1971-10-26T07:37:39.623Z\",\n      \"updated_at\": \"1949-09-12T14:58:56.148Z\"\n    }\n  ],\n  \"meta\": {\n    \"current_page\": 4160,\n    \"per_page\": 411,\n    \"total_count\": 5140,\n    \"total_pages\": 5638\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"canceled\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"duration\": \"<integer>\",\n      \"buffer_before\": \"<integer,null>\",\n      \"buffer_after\": \"<integer,null>\",\n      \"original_start_time\": \"<string,null-date-time>\",\n      \"attendees\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"time_zone\": \"<string>\",\n          \"status\": \"accepted\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"time_zone\": \"<string>\",\n          \"status\": \"tentative\"\n        }\n      ],\n      \"conferencing\": {\n        \"join_url\": \"<string,null-uri>\",\n        \"meeting_id\": \"<string,null>\",\n        \"integration_type\": \"<string>\"\n      },\n      \"payment\": {\n        \"amount\": \"<number>\",\n        \"state\": \"paid\",\n        \"stripe_dashboard_url\": \"<string,null-uri>\"\n      },\n      \"scope\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\"\n      },\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"awaiting_checkout\",\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"duration\": \"<integer>\",\n      \"buffer_before\": \"<integer,null>\",\n      \"buffer_after\": \"<integer,null>\",\n      \"original_start_time\": \"<string,null-date-time>\",\n      \"attendees\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"time_zone\": \"<string>\",\n          \"status\": \"awaiting\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"time_zone\": \"<string>\",\n          \"status\": \"awaiting\"\n        }\n      ],\n      \"conferencing\": {\n        \"join_url\": \"<string,null-uri>\",\n        \"meeting_id\": \"<string,null>\",\n        \"integration_type\": \"<string>\"\n      },\n      \"payment\": {\n        \"amount\": \"<number>\",\n        \"state\": \"paid\",\n        \"stripe_dashboard_url\": \"<string,null-uri>\"\n      },\n      \"scope\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\"\n      },\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"meta\": {\n    \"current_page\": \"<integer>\",\n    \"per_page\": \"<integer>\",\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+              "createdAt": "2026-10-21T21:00:33.000Z",
+              "updatedAt": "2026-10-21T21:00:33.000Z",
+              "uid": "35240-f3bd503a-56c1-4723-9f6c-95bcb37cb153"
             },
             {
-              "id": "b7dfd619-755a-4032-9264-dd205a599017",
+              "id": "8f416834-e276-4c57-9bde-bde6fe0d84f3",
               "name": "Authentication credentials missing or invalid.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "events"
-                  ],
+                  "raw": "{{baseUrl}}/events?page=1&per_page=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "events"
+                  ],
                   "query": [
                     {
+                      "description": "Page number for pagination.",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of results per page.",
                       "key": "per_page",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a7bfa3dc-889e-4f07-8fdc-e3545dc91538",
-          "name": "Get event",
-          "request": {
-            "name": "Get event",
-            "description": {
-              "content": "Fetch a single event by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "events",
-                ":event_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "event_id",
-                  "description": "(Required) The unique identifier of the event."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "da9f8782-d56e-4d78-98a8-7958230c2480",
-              "name": "Event details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "events",
-                    ":event_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "event_id",
-                      "description": "(Required) The unique identifier of the event."
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"status\": \"awaiting_reschedule\",\n  \"start_time\": \"2011-07-07T20:43:47.140Z\",\n  \"end_time\": \"2002-06-23T14:52:34.698Z\",\n  \"duration\": 6080,\n  \"buffer_before\": 8715,\n  \"buffer_after\": 6857,\n  \"original_start_time\": \"2010-09-27T07:21:14.198Z\",\n  \"attendees\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"0BC2wT@h.drw\",\n      \"time_zone\": \"string\",\n      \"status\": \"tentative\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"8QY9zCVjW7XG@tFqBrhsIPeOOJkAMiYZpfKSG.hjms\",\n      \"time_zone\": \"string\",\n      \"status\": \"declined\"\n    }\n  ],\n  \"conferencing\": {\n    \"join_url\": \"http://U.gkmyC,gdsn4d7-hGz\",\n    \"meeting_id\": \"string\",\n    \"integration_type\": \"zoom\"\n  },\n  \"payment\": {\n    \"amount\": 2746.1401692494046,\n    \"state\": \"paid\",\n    \"stripe_dashboard_url\": \"https://fWRegHhoDdNchSHTaptzu.tzqlj3ZV-t0mODh1Fw.3\"\n  },\n  \"scope\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"slug\": \"string\"\n  },\n  \"created_at\": \"1952-04-11T18:56:41.684Z\",\n  \"updated_at\": \"2022-08-17T13:33:56.057Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9dc29bb7-7883-40ef-9ce5-f48929afa9d1",
-              "name": "Authentication credentials missing or invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "events",
-                    ":event_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "event_id",
-                      "description": "(Required) The unique identifier of the event."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e3fd6594-3582-49bf-8c7d-3164ec66fbc3",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "events",
-                    ":event_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "event_id",
-                      "description": "(Required) The unique identifier of the event."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "bfaf3fb2-7a7d-4406-8823-7c64d03c5c07",
-          "name": "Cancel event",
-          "request": {
-            "name": "Cancel event",
-            "description": {
-              "content": "Cancel an event by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "events",
-                ":event_id",
-                "cancel"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "event_id",
-                  "description": "(Required) The unique identifier of the event."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"reason\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f6659a6b-5708-4fc9-8547-86ecc14dfd29",
-              "name": "Event successfully canceled.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "events",
-                    ":event_id",
-                    "cancel"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "event_id",
-                      "description": "(Required) The unique identifier of the event."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"reason\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"status\": \"awaiting_reschedule\",\n  \"start_time\": \"2011-07-07T20:43:47.140Z\",\n  \"end_time\": \"2002-06-23T14:52:34.698Z\",\n  \"duration\": 6080,\n  \"buffer_before\": 8715,\n  \"buffer_after\": 6857,\n  \"original_start_time\": \"2010-09-27T07:21:14.198Z\",\n  \"attendees\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"0BC2wT@h.drw\",\n      \"time_zone\": \"string\",\n      \"status\": \"tentative\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"8QY9zCVjW7XG@tFqBrhsIPeOOJkAMiYZpfKSG.hjms\",\n      \"time_zone\": \"string\",\n      \"status\": \"declined\"\n    }\n  ],\n  \"conferencing\": {\n    \"join_url\": \"http://U.gkmyC,gdsn4d7-hGz\",\n    \"meeting_id\": \"string\",\n    \"integration_type\": \"zoom\"\n  },\n  \"payment\": {\n    \"amount\": 2746.1401692494046,\n    \"state\": \"paid\",\n    \"stripe_dashboard_url\": \"https://fWRegHhoDdNchSHTaptzu.tzqlj3ZV-t0mODh1Fw.3\"\n  },\n  \"scope\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"slug\": \"string\"\n  },\n  \"created_at\": \"1952-04-11T18:56:41.684Z\",\n  \"updated_at\": \"2022-08-17T13:33:56.057Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8d800107-c051-4988-8bb3-3ff55a0bf35e",
-              "name": "Authentication credentials missing or invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "events",
-                    ":event_id",
-                    "cancel"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "event_id",
-                      "description": "(Required) The unique identifier of the event."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"reason\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "24225f32-313d-404c-beb8-4d2174ac6c7a",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "events",
-                    ":event_id",
-                    "cancel"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "event_id",
-                      "description": "(Required) The unique identifier of the event."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"reason\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"sed_8\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"eu_8\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T21:00:33.000Z",
+              "updatedAt": "2026-10-21T21:00:33.000Z",
+              "uid": "35240-8f416834-e276-4c57-9bde-bde6fe0d84f3"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c295a8ff-1155-42a5-b092-b3f73b77d33d",
-          "name": "Create event",
-          "request": {
-            "name": "Create event",
-            "description": {
-              "content": "Create a new event via a scheduling link. You can only create events that match an available time slot for the underlying scheduling link. Use the List Available Slots endpoint to find suitable times.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "links",
-                ":link_id",
-                "events"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "link_id",
-                  "description": "(Required) The unique identifier of the scheduling link."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"attendee\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"time_zone\": \"<string>\"\n  },\n  \"duration\": \"<integer>\",\n  \"fields\": {\n    \"key_0\": true\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "947b98a0-462f-41cd-af03-996f4ef58a25",
-              "name": "Event successfully created.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"attendee\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"time_zone\": \"America/Chicago\"\n  },\n  \"duration\": \"<integer>\",\n  \"fields\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"status\": \"awaiting_reschedule\",\n  \"start_time\": \"2011-07-07T20:43:47.140Z\",\n  \"end_time\": \"2002-06-23T14:52:34.698Z\",\n  \"duration\": 6080,\n  \"buffer_before\": 8715,\n  \"buffer_after\": 6857,\n  \"original_start_time\": \"2010-09-27T07:21:14.198Z\",\n  \"attendees\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"0BC2wT@h.drw\",\n      \"time_zone\": \"string\",\n      \"status\": \"tentative\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"8QY9zCVjW7XG@tFqBrhsIPeOOJkAMiYZpfKSG.hjms\",\n      \"time_zone\": \"string\",\n      \"status\": \"declined\"\n    }\n  ],\n  \"conferencing\": {\n    \"join_url\": \"http://U.gkmyC,gdsn4d7-hGz\",\n    \"meeting_id\": \"string\",\n    \"integration_type\": \"zoom\"\n  },\n  \"payment\": {\n    \"amount\": 2746.1401692494046,\n    \"state\": \"paid\",\n    \"stripe_dashboard_url\": \"https://fWRegHhoDdNchSHTaptzu.tzqlj3ZV-t0mODh1Fw.3\"\n  },\n  \"scope\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"slug\": \"string\"\n  },\n  \"created_at\": \"1952-04-11T18:56:41.684Z\",\n  \"updated_at\": \"2022-08-17T13:33:56.057Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a998e8d9-d098-48ee-b617-fc8f8bdc7eeb",
-              "name": "Authentication credentials missing or invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"attendee\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"time_zone\": \"America/Chicago\"\n  },\n  \"duration\": \"<integer>\",\n  \"fields\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e1972d7f-6dfb-45f7-ba9c-5db6665b8555",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"attendee\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"time_zone\": \"America/Chicago\"\n  },\n  \"duration\": \"<integer>\",\n  \"fields\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2d3648dd-2863-454e-9303-bb05f2ae51e4",
-              "name": "Validation errors.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":link_id",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "link_id",
-                      "description": "(Required) The unique identifier of the scheduling link."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"attendee\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"time_zone\": \"America/Chicago\"\n  },\n  \"duration\": \"<integer>\",\n  \"fields\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:00:33.000Z",
+          "updatedAt": "2026-10-21T21:00:33.000Z",
+          "uid": "35240-e0c655c4-1c3c-4266-b08e-babf99cbe861"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
+      "id": "51d09e9f-3780-42a5-bd0c-bf2e03187b32",
+      "createdAt": "2026-10-21T21:00:33.000Z",
+      "updatedAt": "2026-10-21T21:00:33.000Z",
+      "uid": "35240-51d09e9f-3780-42a5-bd0c-bf2e03187b32"
+    },
     {
-      "type": "string",
-      "value": "https://api.savvycal.com/v1",
-      "key": "baseUrl"
+      "name": "links",
+      "item": [
+        {
+          "name": "{link_id}",
+          "item": [
+            {
+              "name": "events",
+              "item": [
+                {
+                  "name": "Create event",
+                  "id": "1b0f6604-07a0-4b62-9137-2c386debe46a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"attendee\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"time_zone\": \"<string>\"\n  },\n  \"duration\": \"<integer>\",\n  \"fields\": {\n    \"enim4_6\": -99946511,\n    \"ute\": false,\n    \"consectetur_d3\": true,\n    \"sit_c9b\": false,\n    \"ipsum6\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:link_id/events",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":link_id",
+                        "events"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f04c866a-f22f-48b8-933f-2638cbd2b191",
+                          "key": "link_id",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the scheduling link."
+                        }
+                      ]
+                    },
+                    "description": "Create a new event via a scheduling link. You can only create events that match an available time slot for the underlying scheduling link. Use the List Available Slots endpoint to find suitable times."
+                  },
+                  "response": [
+                    {
+                      "id": "87f97b10-a4b2-442e-adde-9a849ff6d8ac",
+                      "name": "Event successfully created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"attendee\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"time_zone\": \"<string>\"\n  },\n  \"duration\": \"<integer>\",\n  \"fields\": {\n    \"enim4_6\": -99946511,\n    \"ute\": false,\n    \"consectetur_d3\": true,\n    \"sit_c9b\": false,\n    \"ipsum6\": true\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/links/:link_id/events",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "links",
+                            ":link_id",
+                            "events"
+                          ],
+                          "variable": [
+                            {
+                              "key": "link_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"awaiting_approval\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"buffer_before\": \"<integer,null>\",\n  \"buffer_after\": \"<integer,null>\",\n  \"original_start_time\": \"<string,null-date-time>\",\n  \"attendees\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"time_zone\": \"<string>\",\n      \"status\": \"declined\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"time_zone\": \"<string>\",\n      \"status\": \"accepted\"\n    }\n  ],\n  \"conferencing\": {\n    \"join_url\": \"<string,null-uri>\",\n    \"meeting_id\": \"<string,null>\",\n    \"integration_type\": \"<string>\"\n  },\n  \"payment\": {\n    \"amount\": \"<number>\",\n    \"state\": \"paid\",\n    \"stripe_dashboard_url\": \"<string,null-uri>\"\n  },\n  \"scope\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\"\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-21T21:00:33.000Z",
+                      "updatedAt": "2026-10-21T21:00:33.000Z",
+                      "uid": "35240-87f97b10-a4b2-442e-adde-9a849ff6d8ac"
+                    },
+                    {
+                      "id": "44be6661-06ee-4ac9-b8d6-6d8f7ef72a5a",
+                      "name": "Authentication credentials missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"attendee\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"time_zone\": \"<string>\"\n  },\n  \"duration\": \"<integer>\",\n  \"fields\": {\n    \"enim4_6\": -99946511,\n    \"ute\": false,\n    \"consectetur_d3\": true,\n    \"sit_c9b\": false,\n    \"ipsum6\": true\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/links/:link_id/events",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "links",
+                            ":link_id",
+                            "events"
+                          ],
+                          "variable": [
+                            {
+                              "key": "link_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"sed_8\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"eu_8\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-10-21T21:00:33.000Z",
+                      "updatedAt": "2026-10-21T21:00:33.000Z",
+                      "uid": "35240-44be6661-06ee-4ac9-b8d6-6d8f7ef72a5a"
+                    },
+                    {
+                      "id": "feafe00a-b93c-4f21-8a7a-11bae1fcb5f9",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"attendee\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"time_zone\": \"<string>\"\n  },\n  \"duration\": \"<integer>\",\n  \"fields\": {\n    \"enim4_6\": -99946511,\n    \"ute\": false,\n    \"consectetur_d3\": true,\n    \"sit_c9b\": false,\n    \"ipsum6\": true\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/links/:link_id/events",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "links",
+                            ":link_id",
+                            "events"
+                          ],
+                          "variable": [
+                            {
+                              "key": "link_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"sed_8\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"eu_8\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-10-21T21:00:33.000Z",
+                      "updatedAt": "2026-10-21T21:00:33.000Z",
+                      "uid": "35240-feafe00a-b93c-4f21-8a7a-11bae1fcb5f9"
+                    },
+                    {
+                      "id": "ca104f6b-369a-484e-9253-585b14286e09",
+                      "name": "Validation errors.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"attendee\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"time_zone\": \"<string>\"\n  },\n  \"duration\": \"<integer>\",\n  \"fields\": {\n    \"enim4_6\": -99946511,\n    \"ute\": false,\n    \"consectetur_d3\": true,\n    \"sit_c9b\": false,\n    \"ipsum6\": true\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/links/:link_id/events",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "links",
+                            ":link_id",
+                            "events"
+                          ],
+                          "variable": [
+                            {
+                              "key": "link_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"sed_8\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"eu_8\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-10-21T21:00:33.000Z",
+                      "updatedAt": "2026-10-21T21:00:33.000Z",
+                      "uid": "35240-ca104f6b-369a-484e-9253-585b14286e09"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T21:00:33.000Z",
+                  "updatedAt": "2026-10-21T21:00:33.000Z",
+                  "uid": "35240-1b0f6604-07a0-4b62-9137-2c386debe46a"
+                }
+              ],
+              "id": "c3e069d9-a41b-45f8-ae99-47ce96ca1a75",
+              "createdAt": "2026-10-21T21:00:33.000Z",
+              "updatedAt": "2026-10-21T21:00:33.000Z",
+              "uid": "35240-c3e069d9-a41b-45f8-ae99-47ce96ca1a75"
+            }
+          ],
+          "id": "cc1848de-a472-49f4-b239-172889c231fd",
+          "createdAt": "2026-10-21T21:00:33.000Z",
+          "updatedAt": "2026-10-21T21:00:33.000Z",
+          "uid": "35240-cc1848de-a472-49f4-b239-172889c231fd"
+        }
+      ],
+      "id": "f43b4d21-7ede-45fa-b689-8803ec0564a4",
+      "createdAt": "2026-10-21T21:00:33.000Z",
+      "updatedAt": "2026-10-21T21:00:33.000Z",
+      "uid": "35240-f43b4d21-7ede-45fa-b689-8803ec0564a4"
     }
   ],
   "auth": {
@@ -920,17 +956,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "a3b76e44-95e4-4020-b82b-e5c54fb5e9a9",
-    "name": "SavvyCal Meetings Current User Events API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.\n\n\nContact Support:\n Name: SavvyCal Developer Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.savvycal.com/v1"
     }
-  }
+  ]
 }

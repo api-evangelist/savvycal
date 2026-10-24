@@ -1,0 +1,347 @@
+{
+  "info": {
+    "_postman_id": "5a6d8a04-03d2-415a-89ce-b6069ec44e36",
+    "name": "SavvyCal Meetings Time Zones API",
+    "description": "The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.\n\nContact Support:\n Name: SavvyCal Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:01:07.000Z",
+    "updatedAt": "2026-10-21T21:01:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5a6d8a04-03d2-415a-89ce-b6069ec44e36"
+  },
+  "item": [
+    {
+      "name": "time_zones",
+      "item": [
+        {
+          "name": "{segments}",
+          "item": [
+            {
+              "name": "Get time zone",
+              "id": "654a13af-d2b9-48f2-a982-7068cd058810",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/time_zones/:segments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "time_zones",
+                    ":segments"
+                  ],
+                  "variable": [
+                    {
+                      "id": "af09a385-901e-4936-8df4-65e080c12eef",
+                      "key": "segments",
+                      "value": "<string>",
+                      "description": "(Required) The time zone identifier path segments (e.g., \"America/New_York\").\n"
+                    }
+                  ]
+                },
+                "description": "Get detailed information about a specific time zone."
+              },
+              "response": [
+                {
+                  "id": "8f53236e-df4f-44b2-b63c-8beb01b8e4d4",
+                  "name": "Time zone details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/time_zones/:segments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "time_zones",
+                        ":segments"
+                      ],
+                      "variable": [
+                        {
+                          "key": "segments"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"identifier\": \"<string>\",\n  \"name\": \"<string>\",\n  \"utc_offset\": \"<string>\",\n  \"dst\": \"<boolean>\"\n}",
+                  "createdAt": "2026-10-21T21:01:08.000Z",
+                  "updatedAt": "2026-10-21T21:01:08.000Z",
+                  "uid": "35240-8f53236e-df4f-44b2-b63c-8beb01b8e4d4"
+                },
+                {
+                  "id": "01fe4680-3ca5-4676-ab64-0af4628f9387",
+                  "name": "Authentication credentials missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/time_zones/:segments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "time_zones",
+                        ":segments"
+                      ],
+                      "variable": [
+                        {
+                          "key": "segments"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"ullamcodbd\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ipsum50\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:01:08.000Z",
+                  "updatedAt": "2026-10-21T21:01:08.000Z",
+                  "uid": "35240-01fe4680-3ca5-4676-ab64-0af4628f9387"
+                },
+                {
+                  "id": "e91355be-c836-4b1d-8de2-5ac2fd70b8db",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/time_zones/:segments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "time_zones",
+                        ":segments"
+                      ],
+                      "variable": [
+                        {
+                          "key": "segments"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"ullamcodbd\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ipsum50\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:01:08.000Z",
+                  "updatedAt": "2026-10-21T21:01:08.000Z",
+                  "uid": "35240-e91355be-c836-4b1d-8de2-5ac2fd70b8db"
+                }
+              ],
+              "createdAt": "2026-10-21T21:01:08.000Z",
+              "updatedAt": "2026-10-21T21:01:08.000Z",
+              "uid": "35240-654a13af-d2b9-48f2-a982-7068cd058810"
+            }
+          ],
+          "id": "4626a76b-d226-47f5-b358-5d68b9aa5876",
+          "createdAt": "2026-10-21T21:01:08.000Z",
+          "updatedAt": "2026-10-21T21:01:08.000Z",
+          "uid": "35240-4626a76b-d226-47f5-b358-5d68b9aa5876"
+        },
+        {
+          "name": "List time zones",
+          "id": "46de6807-c847-48e9-a76e-65e98d3e4079",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/time_zones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "time_zones"
+              ]
+            },
+            "description": "Get a list of time zones with localized names and DST information."
+          },
+          "response": [
+            {
+              "id": "1e5772a8-7691-4a11-b7d7-511e257e59a6",
+              "name": "List of time zones.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/time_zones",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "time_zones"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"utc_offset\": \"<string>\",\n      \"dst\": \"<boolean>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"utc_offset\": \"<string>\",\n      \"dst\": \"<boolean>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T21:01:08.000Z",
+              "updatedAt": "2026-10-21T21:01:08.000Z",
+              "uid": "35240-1e5772a8-7691-4a11-b7d7-511e257e59a6"
+            },
+            {
+              "id": "efc300d2-bf8e-4c4b-85de-26d848e8ed21",
+              "name": "Authentication credentials missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/time_zones",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "time_zones"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"ullamcodbd\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ipsum50\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T21:01:08.000Z",
+              "updatedAt": "2026-10-21T21:01:08.000Z",
+              "uid": "35240-efc300d2-bf8e-4c4b-85de-26d848e8ed21"
+            }
+          ],
+          "createdAt": "2026-10-21T21:01:08.000Z",
+          "updatedAt": "2026-10-21T21:01:08.000Z",
+          "uid": "35240-46de6807-c847-48e9-a76e-65e98d3e4079"
+        }
+      ],
+      "id": "63f9fb34-bd01-40ea-929f-4660ad768414",
+      "createdAt": "2026-10-21T21:01:08.000Z",
+      "updatedAt": "2026-10-21T21:01:08.000Z",
+      "uid": "35240-63f9fb34-bd01-40ea-929f-4660ad768414"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.savvycal.com/v1"
+    }
+  ]
+}

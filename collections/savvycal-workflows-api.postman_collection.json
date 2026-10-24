@@ -1,375 +1,367 @@
 {
+  "info": {
+    "_postman_id": "5ba35cdb-46f3-4f90-8701-62ae5a5e3bcb",
+    "name": "SavvyCal Meetings Workflows API",
+    "description": "The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.\n\nContact Support:\n Name: SavvyCal Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:01:01.000Z",
+    "updatedAt": "2026-10-21T21:01:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5ba35cdb-46f3-4f90-8701-62ae5a5e3bcb"
+  },
   "item": [
     {
-      "id": "223e396b-dfed-48f8-8797-109b1128ef7c",
-      "name": "Workflows",
-      "description": {
-        "content": "Manage automation workflows.",
-        "type": "text/plain"
-      },
+      "name": "workflows",
       "item": [
         {
-          "id": "dadb2cf4-53ce-4cb5-b3c1-88cd419eda88",
+          "name": "{workflow_id}",
+          "item": [
+            {
+              "name": "Get workflow",
+              "id": "7a328166-dff0-4c98-8960-270dee75a0d6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/workflows/:workflow_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "workflows",
+                    ":workflow_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8bfdf636-b3c4-4faa-b188-82f45b27090a",
+                      "key": "workflow_id",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the workflow."
+                    }
+                  ]
+                },
+                "description": "Get a specific workflow by ID."
+              },
+              "response": [
+                {
+                  "id": "698a2ea6-4203-4e89-9f39-f54b37b6808b",
+                  "name": "Workflow details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workflows/:workflow_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workflows",
+                        ":workflow_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "workflow_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"state\": \"active\",\n  \"scope\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\"\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-21T21:01:01.000Z",
+                  "updatedAt": "2026-10-21T21:01:01.000Z",
+                  "uid": "35240-698a2ea6-4203-4e89-9f39-f54b37b6808b"
+                },
+                {
+                  "id": "8508b2a8-048b-4732-8035-0791565bf39a",
+                  "name": "Authentication credentials missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workflows/:workflow_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workflows",
+                        ":workflow_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "workflow_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"voluptate5\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ipsumacd\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"eu_\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:01:01.000Z",
+                  "updatedAt": "2026-10-21T21:01:01.000Z",
+                  "uid": "35240-8508b2a8-048b-4732-8035-0791565bf39a"
+                },
+                {
+                  "id": "97943b14-c167-4fc3-810f-1a4a949e9bb9",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workflows/:workflow_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workflows",
+                        ":workflow_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "workflow_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"voluptate5\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ipsumacd\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"eu_\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:01:01.000Z",
+                  "updatedAt": "2026-10-21T21:01:01.000Z",
+                  "uid": "35240-97943b14-c167-4fc3-810f-1a4a949e9bb9"
+                }
+              ],
+              "createdAt": "2026-10-21T21:01:01.000Z",
+              "updatedAt": "2026-10-21T21:01:01.000Z",
+              "uid": "35240-7a328166-dff0-4c98-8960-270dee75a0d6"
+            }
+          ],
+          "id": "3ad548a7-feaa-4309-80f7-42707180f9b8",
+          "createdAt": "2026-10-21T21:01:01.000Z",
+          "updatedAt": "2026-10-21T21:01:01.000Z",
+          "uid": "35240-3ad548a7-feaa-4309-80f7-42707180f9b8"
+        },
+        {
           "name": "List workflows",
+          "id": "754ba733-4703-4607-951e-bbaf589fd866",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List workflows",
-            "description": {
-              "content": "Get a paginated list of workflows for scopes the authenticated user manages.\n",
-              "type": "text/plain"
-            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/workflows?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "workflows"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Page number for pagination.",
                   "key": "page",
-                  "value": "1",
-                  "description": "Page number for pagination."
+                  "value": "1"
                 },
                 {
-                  "disabled": false,
+                  "description": "Number of results per page.",
                   "key": "per_page",
-                  "value": "20",
-                  "description": "Number of results per page."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "5b688172-00f5-484c-ad48-f254bdd526a4",
-              "name": "Paginated list of workflows.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "workflows"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "per_page",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"disabled\",\n      \"scope\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"slug\": \"string\"\n      },\n      \"created_at\": \"1959-06-08T01:38:38.769Z\",\n      \"updated_at\": \"1997-09-08T20:32:48.813Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"active\",\n      \"scope\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"slug\": \"string\"\n      },\n      \"created_at\": \"1966-07-22T17:20:55.124Z\",\n      \"updated_at\": \"1964-08-23T23:41:57.564Z\"\n    }\n  ],\n  \"meta\": {\n    \"current_page\": 2884,\n    \"per_page\": 7849,\n    \"total_count\": 3425,\n    \"total_pages\": 9160\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c309eb1f-53ac-4de2-bf08-8e70b63415c3",
-              "name": "Authentication credentials missing or invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "workflows"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "per_page",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "599bce33-d87b-4c6b-9adf-177eca101aca",
-          "name": "Get workflow",
-          "request": {
-            "name": "Get workflow",
-            "description": {
-              "content": "Get a specific workflow by ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "workflows",
-                ":workflow_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "workflow_id",
-                  "description": "(Required) The unique identifier of the workflow."
+                  "value": "20"
                 }
               ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Get a paginated list of workflows for scopes the authenticated user manages."
           },
           "response": [
             {
-              "id": "84737fa1-77ce-4c2d-894b-c3864014ced5",
-              "name": "Workflow details.",
+              "id": "e4681060-37d1-4bcb-b59f-71f3e4444214",
+              "name": "Paginated list of workflows.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "workflows",
-                    ":workflow_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "workflow_id",
-                      "description": "(Required) The unique identifier of the workflow."
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/workflows?page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "workflows"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of results per page.",
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"state\": \"active\",\n  \"scope\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"slug\": \"string\"\n  },\n  \"created_at\": \"1962-11-28T02:18:29.119Z\",\n  \"updated_at\": \"2004-12-18T15:05:59.810Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"state\": \"disabled\",\n      \"scope\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\"\n      },\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"state\": \"active\",\n      \"scope\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\"\n      },\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"meta\": {\n    \"current_page\": \"<integer>\",\n    \"per_page\": \"<integer>\",\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+              "createdAt": "2026-10-21T21:01:01.000Z",
+              "updatedAt": "2026-10-21T21:01:01.000Z",
+              "uid": "35240-e4681060-37d1-4bcb-b59f-71f3e4444214"
             },
             {
-              "id": "758d7ece-3ae6-4623-aa22-ffa6a1412530",
+              "id": "b62922e4-68b1-41b1-8dca-46d5b5e35688",
               "name": "Authentication credentials missing or invalid.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "workflows",
-                    ":workflow_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "workflow_id",
-                      "description": "(Required) The unique identifier of the workflow."
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/workflows?page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "workflows"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of results per page.",
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2c0b423b-5d3a-4116-ab61-26ea73904a90",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "workflows",
-                    ":workflow_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "workflow_id",
-                      "description": "(Required) The unique identifier of the workflow."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": {\n    \"voluptate5\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ipsumacd\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"eu_\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T21:01:01.000Z",
+              "updatedAt": "2026-10-21T21:01:01.000Z",
+              "uid": "35240-b62922e4-68b1-41b1-8dca-46d5b5e35688"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:01:01.000Z",
+          "updatedAt": "2026-10-21T21:01:01.000Z",
+          "uid": "35240-754ba733-4703-4607-951e-bbaf589fd866"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.savvycal.com/v1",
-      "key": "baseUrl"
+      "id": "dda310a7-921a-4d6f-ae2e-90ca98ae7a1d",
+      "createdAt": "2026-10-21T21:01:01.000Z",
+      "updatedAt": "2026-10-21T21:01:01.000Z",
+      "uid": "35240-dda310a7-921a-4d6f-ae2e-90ca98ae7a1d"
     }
   ],
   "auth": {
@@ -377,17 +369,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "6261bdad-c3e0-4857-a0ab-0e3de143b67b",
-    "name": "SavvyCal Meetings Current User Workflows API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The SavvyCal Meetings REST API enables developers to manage scheduling links, events, webhooks, workflows, and time zones programmatically. It uses OAuth 2.0 and personal access tokens for authentication and communicates in JSON format.\n\n\nContact Support:\n Name: SavvyCal Developer Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.savvycal.com/v1"
     }
-  }
+  ]
 }
